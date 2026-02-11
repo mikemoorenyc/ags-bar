@@ -1,0 +1,9 @@
+// https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
+@use "sass:color";
+$text: #efefef;
+$bg-color: #{"@theme_bg_color"};
+$border-black: rgba(255, 255, 255, .15);
+$window-base: #0a0a0a;
+$primary-yellow:  #e5a50a;
+$yelllow-bg :color.change($primary-yellow, $alpha:.15);
+$hover-bg: rgba(255,255,255,.05);

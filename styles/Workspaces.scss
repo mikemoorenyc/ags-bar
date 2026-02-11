@@ -1,0 +1,14 @@
+@use "./variables.scss" as v;
+.workspace-container {
+    .ws {
+    margin-right:2px;
+    font-size:14px;
+    min-width:24px;
+    &.focused {
+        background: v.$yelllow-bg;
+    }
+    &.empty:not(.focused) {
+        color: rgba(255,255,255,.5)
+    }
+}
+}

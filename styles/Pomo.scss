@@ -1,0 +1,44 @@
+@use "./variables.scss" as v; 
+
+
+.pomo {
+    .banana {
+        color: v.$primary-yellow;
+        animation: wiggle 1s steps(2) infinite;
+        &.start {
+            color: #4CE60A;
+        }
+        &.end {
+            color: #805900;
+        }
+        &.break {
+            color: v.$text;
+            
+        }
+        &:not(.stopped):hover {
+            background:none; 
+        }
+      
+    }
+    border-radius:4px;
+    &:not(.stopped) {
+        background:v.$yelllow-bg;
+        padding-right: 6px;
+    }
+    .control {
+        font-size: 16px;
+        margin: 0 2px;
+        padding: 0 2px;
+    }
+    &.stopped, &.paused {
+        .banana {
+            animation: none;
+        }
+    }
+}
+
+
+@keyframes wiggle {
+  0% { transform: rotateZ(-15deg); }
+  100% { transform: rotateZ(15deg); }
+}

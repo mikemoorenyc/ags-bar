@@ -1,0 +1,19 @@
+@use "variables";
+window.Bar {
+  background: rgba(0,0,0,.2);
+  color: variables.$text;
+  font-weight:normal;
+  border-top: 1px solid variables.$border-black;
+  padding: 0 2px;
+  
+
+
+  > centerbox {
+    background: variables.$bg-color;
+    border-radius: 10px;
+    margin: 0;
+  }
+
+  
+}
+

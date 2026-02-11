@@ -1,0 +1,61 @@
+@use "./variables.scss" as v; 
+.clockLabel {
+    font-size:12px;
+    line-height:normal;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-left: 6px;
+    padding-right:6px;
+}
+.clockContainer {
+
+    min-width: 140px;
+    
+    margin-left:0;
+
+}
+
+window#CALENDAR_WINDOW {
+    background:none;
+}
+#CALENDAR_WINDOW calendar{
+    all:unset;
+    background:v.$window-base;
+    border: 1px solid v.$border-black;
+    border-radius: 6px;
+    padding: 16px;
+    font-size: 14px;
+
+    * {
+        all:unset;
+    }
+    header {
+        padding-bottom: 16px;
+        margin: 0 8px;
+        button.image-button {
+            image{}
+        }
+        stack.month {
+            label{}
+        }
+        label.year{}
+    }
+    grid {
+        label {
+            padding: 4px;
+        }
+        label.day-name{}
+        label.week-number{}
+        label.day-number{
+            min-height:32px;
+            &.other-month {
+                color: v.$border-black;
+            }
+            &.today{
+                background: v.$primary-yellow;
+                color:v.$window-base;
+                border-radius:9999px;
+            }
+        }
+    }
+}
+    
