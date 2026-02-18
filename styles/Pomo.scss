@@ -9,13 +9,13 @@
             color: #4CE60A;
         }
         &.end {
-            color: #805900;
+            color: #5b4000;
         }
         &.break {
             color: v.$text;
             
         }
-        &:not(.stopped):hover {
+        &:not(.stopped),&:not(.stopped):hover {
             background:none; 
         }
       

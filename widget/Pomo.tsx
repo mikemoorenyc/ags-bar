@@ -1,23 +1,24 @@
 import { Accessor, createState ,createComputed} from "gnim"
 import { execAsync } from "ags/process";
 import { onCleanup } from "gnim"
-import { With } from "gnim";
-import { Astal, Gdk, Gtk } from "ags/gtk4"
-import Graphene from "gi://Graphene?version=1.0"
-import app from "ags/gtk4/app"
+
+import {  Gtk } from "ags/gtk4"
+
 export default function () {
     const [timer,updateTimer] = createState<null|any>(null)
     const [state,updateState] = createState<string>("stopped");
     const [count,updateCount] = createState<number>(0);
     let box :Gtk.Box;
-
+    const totalSeconds = 2100;
+    
     const startTimer = (state:string) => {
         console.log(state);
         updateState("running");
         if(state === "stopped") {
             execAsync('notify-send "Get to work"')
+          
             console.log("d");
-            updateCount(35);
+            updateCount(totalSeconds);
             
         }
         updateTimer(()=> {
@@ -25,15 +26,15 @@ export default function () {
                 updateCount((prev)=> {
                     if(prev < 1) {
                         execAsync('notify-send "Get to work" ')
-                        return 35;
+                        return totalSeconds;
                     };
-                    if(prev === 6) {
+                    if(prev === 6*60) {
                         execAsync('notify-send "Take a break" ')
                     }
                     return prev -1
                 })
 
-            },1000 * 60)
+            },1000 )
         })
     }
     const stopTimer = (pause?:boolean) => {
@@ -52,15 +53,22 @@ export default function () {
         updateTimer(null);
     })
     const stateString = createComputed(()=>state().toString());
-    const countString = createComputed(()=>count().toString())
-    const pauseButtons = createComputed(()=>state().toString() == "running"?"󰐊":"󰏤")
-    const countLabel = createComputed(()=>count().toString());
+    const pauseButtons = createComputed(()=>state().toString() == "running"?"󰏤":"󰐊")
+
     const controlsVisible = createComputed(()=> state() !== "stopped")
     const containerClasses = createComputed(()=> {
         const classes = ["container","pomo"];
         return [...classes,state()]
     })
-    const hasTooltip = createComputed(()=>state()=="stopped");
+    const toolTipText = createComputed(()=> {
+        if(state()=="stopped") return "Start Pomodoro";
+        const time:number = count();
+        const remaining:number = totalSeconds - (totalSeconds - time);
+        const minutes = Math.floor(remaining / 60);
+        const seconds = remaining % 60;
+
+        return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    })
 
     const buttonClasses = createComputed(()=> {
         const classes = ["banana","button"];
@@ -68,18 +76,16 @@ export default function () {
         const time = parseInt(count().toString());
         const stateString = state().toString(); 
         if(stateString === "stopped") return [...classes,...["stopped"]];
-        if(time > 25) return [...classes,...["start"]]
-        if(time > 15) return [...classes,...["middle"]]
-        if(time > 5 ) return [...classes,...["end"]]
+        if(time > 25 * 60) return [...classes,...["start"]]
+        if(time > 15 * 60) return [...classes,...["middle"]]
+        if(time > 5 * 60 ) return [...classes,...["end"]]
         
         return [...classes,...["break"]] 
     })
     const bananaLabel = createComputed(()=> {
+        return (count() <= 5   && state() !== "stopped" ) ? "":""
         
-        if(count() <= 5   && state() !== "stopped" ) {
-            return ""
-        }
-        return ""
+       
     })
 
     return (
@@ -88,10 +94,11 @@ export default function () {
         box = self
       
       }}
-    cssClasses={containerClasses}>
+    cssClasses={containerClasses}
+    tooltipText={toolTipText}>
         <button 
-            tooltipText={"Start Pomodoro"}
-            hasTooltip={hasTooltip}
+            
+            hasTooltip={true}
             cssClasses={buttonClasses} 
             label={bananaLabel} onClicked={()=>{
         
@@ -111,7 +118,7 @@ export default function () {
                     startTimer(state()); 
                 }
             }}/>
-            <button class={"control"} label={"󰓛"} onClicked={()=>{stopTimer()}}></button>
+            <button class={"control"} label={"󰓛"} tooltipText={"Stop Pomodoro"} onClicked={()=>{stopTimer()}}></button>
         </box>
         
 

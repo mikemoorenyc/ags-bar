@@ -1,9 +1,17 @@
 // https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
 @use "sass:color";
 $text: #efefef;
+$disabled-text: rgba(255,255,255,.5);
+$window-base: #171412;
 $bg-color: #{"@theme_bg_color"};
-$border-black: rgba(255, 255, 255, .15);
-$window-base: #0a0a0a;
+$container-bg: color.adjust($window-base,$lightness:4%);
+$container-bg-hover: color.adjust($window-base,$lightness:6%);
+$border-black: $container-bg;
 $primary-yellow:  #e5a50a;
 $yelllow-bg :color.change($primary-yellow, $alpha:.15);
 $hover-bg: rgba(255,255,255,.05);
+
+
+$font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+$font-mono: "Roboto Mono", monospace;
+$font-icon: 'JetBrainsMono Nerd Font Mono', "Noto Color Emoji";

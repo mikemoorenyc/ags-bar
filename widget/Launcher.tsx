@@ -6,15 +6,18 @@ export default function Launcher() {
     return <box 
     
 
-    class={"container launcher-container"}>
+    class={"container-spacer launcher-container"}>
         <button 
         tooltipText={"Launch Menu"}
+        
         onClicked={
             ()=> {
                 execAsync("omarchy-menu")
             }
         }
-        class={"button launcher-button"}>󰀻</button>
+        class={"button launcher-button"}>
+            <image iconName={"banana-launcher-symbolic"} pixelSize={16} />
+        </button>
 
     </box>
 }

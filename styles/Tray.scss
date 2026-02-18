@@ -1,0 +1,19 @@
+@use "./variables.scss" as v;
+.tray-popup {
+    padding: 8px 0;
+    min-width: 32px;
+    .popup-button {
+        
+        margin: 0 4px;
+        
+        border-radius:4px;
+        &:hover {
+            background: v.$container-bg-hover;
+        }
+        image {
+            padding: 4px;
+        }
+  
+    }
+    
+}

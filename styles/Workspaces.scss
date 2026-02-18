@@ -4,11 +4,35 @@
     margin-right:2px;
     font-size:14px;
     min-width:24px;
+    
+    font-family: v.$font-mono;
+    .workspace-button {
+        padding-left:7px;
+    }
     &.focused {
         background: v.$yelllow-bg;
     }
     &.empty:not(.focused) {
-        color: rgba(255,255,255,.5)
+        color: v.$disabled-text;
+    }
+    &.empty {
+        button {
+            min-width:24px;
+            padding-left: 0;
+        }
+    }
+    .client-button {
+       padding: 0 0px;
+       margin: 0 4px;
+       box-shadow: inset 0 -2px 0 rgba(255,255,255,.15);
+       &.focused {
+        box-shadow: inset 0 -2px 0 v.$primary-yellow;
+       }
+    }
+    .client-label {
+        font-size:13px;
+        margin-left:6px;
+        font-family: v.$font-sans;
     }
 }
 }

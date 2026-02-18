@@ -1,23 +1,39 @@
 @use "./variables.scss" as v; 
 tooltip {
-    background:v.$window-base;
-    font-size: 12px;
+    background:v.$text;
+    color:v.$window-base;
+    font-size: 13px;
     border-radius:4px;
     border:1px solid v.$border-black;
     padding:4px 6px;
+    font-family: v.$font-mono;
 }
+@mixin container-spacer {
+    margin:4px 3px;
 
-
-.container {
-    margin:6px;
+}
+@mixin container-style {
+    border-radius: 6px;
+    background: v.$container-bg;
+}
+.container,.container-spacer {
+    @include container-spacer();
+}
+.container-button {
+    @include container-spacer();
+    @include container-style();
+    padding:0 8px;
     &.round {
         border-radius: 4px;
         padding: 0 4px;
     }
+    &:hover {
+         background:v.$container-bg-hover;
+    }
 }
 
 .button {
-    border-radius: 4px;
+    @include container-style();
     padding: 0;
     min-height:32px;
     min-width:32px;
@@ -30,5 +46,16 @@ tooltip {
     }
 }
 .button:hover {
-    background-color: v.$hover-bg;
+   background:v.$container-bg-hover;
+}
+.popover-styles,popover {
+    background:v.$window-base;
+    border: 1px solid v.$border-black;
+    border-radius: 6px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.1)
+}
+popover {
+    *:disabled,*.disabled {
+        color:red; 
+    }
 }

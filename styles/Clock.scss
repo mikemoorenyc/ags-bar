@@ -1,32 +1,25 @@
 @use "./variables.scss" as v; 
 .clockLabel {
-    font-size:12px;
+    font-size:15px;
     line-height:normal;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding-left: 6px;
-    padding-right:6px;
+    font-family: v.$font-mono;
+
 }
-.clockContainer {
-
-    min-width: 140px;
-    
-    margin-left:0;
-
+.clockButton {
+    padding: 0 8px;
 }
 
 window#CALENDAR_WINDOW {
     background:none;
 }
 #CALENDAR_WINDOW calendar{
-    all:unset;
-    background:v.$window-base;
-    border: 1px solid v.$border-black;
-    border-radius: 6px;
+
+
     padding: 16px;
     font-size: 14px;
 
     * {
-        all:unset;
+        
     }
     header {
         padding-bottom: 16px;
@@ -48,7 +41,7 @@ window#CALENDAR_WINDOW {
         label.day-number{
             min-height:32px;
             &.other-month {
-                color: v.$border-black;
+                color: v.$disabled-text;
             }
             &.today{
                 background: v.$primary-yellow;

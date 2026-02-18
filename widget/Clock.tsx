@@ -3,8 +3,7 @@ import { Astal, Gtk, Gdk } from "ags/gtk4"
 import app from "ags/gtk4/app"
 export default function Clock({monitor}:{monitor:Gdk.Monitor}) {
    const time = createPoll("", 1000 * 60, 
-    `date +"%I:%M %p
-    %m/%d/%y"`)
+    `date +"%I:%M%p %m/%d/%y"`)
     const calendarPopUp = app.get_window("CALENDAR_WINDOW");
 
     
@@ -12,13 +11,13 @@ export default function Clock({monitor}:{monitor:Gdk.Monitor}) {
 
 
     return (
-        <box  class="clockContainer container">
+        <box  class=" clockContainer container-spacer">
 
-          <button hexpand halign={Gtk.Align.END} onClicked={()=> {
+          <button class={"button clockButton"} onClicked={()=> {
             if(!calendarPopUp) return ;
             calendarPopUp.set_visible(!calendarPopUp?.get_visible());
           }}>
-          <label justify={Gtk.Justification.RIGHT}halign={Gtk.Align.START}class={"button clockLabel"}  label={time} />
+          <label justify={Gtk.Justification.RIGHT}halign={Gtk.Align.START}class={" clockLabel"}  label={time} />
     
         </button>
       

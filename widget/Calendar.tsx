@@ -24,9 +24,10 @@ import Graphene from "gi://Graphene?version=1.0"
       application={app}
       anchor={BOTTOM|RIGHT}
       monitor={0}
-      marginBottom={12}
-      marginRight={12}
+      marginBottom={8}
+      marginRight={8}
       keymode={Astal.Keymode.EXCLUSIVE}
+      class="Bar"
     >
       <Gtk.EventControllerKey
         onKeyPressed={({ widget: win }, key: number) => {
@@ -38,7 +39,7 @@ import Graphene from "gi://Graphene?version=1.0"
       />
   <Gtk.GestureClick
         onReleased={({ widget: win }, _, x, y) => {
-            
+            console.log("cleck")
            const [, rect] = children?.compute_bounds(win)
           const position = new Graphene.Point({ x, y })
 
@@ -56,6 +57,6 @@ import Graphene from "gi://Graphene?version=1.0"
 }
 export default function () {
     return <Calendar >
-<Gtk.Calendar cssName={"calendar"}/>
+<Gtk.Calendar cssName={"calendar"} class={"popover-styles"}/>
         </Calendar>
 }

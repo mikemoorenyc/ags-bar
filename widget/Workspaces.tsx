@@ -4,21 +4,60 @@ import { For,With } from "gnim";
 import AstalHyprland from "gi://AstalHyprland?version=0.1";
 
 import { Accessor } from "gnim";
+import Pango from "gi://Pango"
+
+// @ts-ignore
+import AstalApps from "gi://AstalApps?version=0.1";
+
+let appManager: AstalApps.Apps | null = null;
+
+const hypr = AstalHyprland.get_default()
+
+const iconFinder = (client:AstalHyprland.Client) :string=> {
+    if (!appManager) {
+      appManager = new AstalApps.Apps();
+   }
+  
+   const nameSplit = client.get_class().split(".")
+   const app = appManager.fuzzy_query(nameSplit[nameSplit.length-1]);
+   if(!app.length) {
+    return "application-x-generic"
+   }
+   return app[0].get_icon_name(); 
+}
 
 // / <label label={focused.toString()}/>
-const WorkspaceItem = function({item,focused}:{item:any,focused:any}) {
-    const [buttonState,updateButtonState] = createState(["button","sm"])
-    /*
-    const clients = createBinding(item,"clients");
+function ClientItem({client}:{client:AstalHyprland.Client}) {
+    const title = createBinding(client,"title");
+    const focusedClient = createBinding(hypr,"focused-client");
+    const toolTip = createComputed(()=>title().trim())
+    
+    const iconName = createComputed(()=>iconFinder(client));
+    const focusedAddress = createComputed(()=> (focusedClient()&&focusedClient()?.address)?focusedClient().address.toString():"")
 
-    const num = createComputed(()=>clients().length)
-    const isVisible = createComputed(()=>clients().length > 0?"not-empty":"empty");
-    const focusedClass = createComputed(()=> {
-        const wsId = item.id.toString();
-        return wsId === focused.toString() ? "focused":"not-focused"
+
+    const btnClass = createComputed(()=> {
+        const classes = ["client-button"];
+        const isFocused = focusedAddress() == client.get_address().toString();
+        if(isFocused) {
+            return [...classes,...["focused"]]
+        }
+        return classes;
     })
-    */
+    return <button cssClasses={btnClass} tooltipText={toolTip}  onClicked={()=>{client.focus()}}>
+        <box>
+            <image iconName={iconName} pixelSize={16}/>
+        <label  
+        maxWidthChars={16}
+        ellipsize={Pango.EllipsizeMode.END}
+        label={toolTip} class="client-label"/>
+        </box>
+    </button>
+}
+const WorkspaceItem = function({item,focused}:{item:any,focused:any}) {
+
    const clients = createBinding(item,"clients");
+   const showClients = createComputed(()=>clients().length > 0);
    
    const btnClasses = createComputed(()=> {
     const classes=["button","sm","ws"];
@@ -32,18 +71,28 @@ const WorkspaceItem = function({item,focused}:{item:any,focused:any}) {
    })
     
     
-    return <button cssClasses={btnClasses()} label={item.id.toString()} onClicked={()=>{item.focus()}} />
+    return <box cssClasses={btnClasses}>
+        
+        <box><button class={"workspace-button"} label={item.id.toString()} onClicked={()=>{item.focus()}} />
+        <box visible={showClients} css={"padding-right:7px;"}>
+            <For each={clients}>{
+            (client)=><ClientItem client={client} />    
+            }</For>
+        </box>
+        </box>
+    </box>
        
 
    
     
 }
+//
 
 export default function () {
-    const hypr = AstalHyprland.get_default()
+    
     const ws = createBinding(hypr,"workspaces");
     const focusedWorkspace = createBinding(hypr,"focused-workspace")
-
+    
     const flip = createComputed(()=>ws().sort((a:any, b:any) => a.id - b.id))
     const focusId = createComputed(()=>focusedWorkspace().id)
 

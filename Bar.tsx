@@ -1,6 +1,6 @@
 import app from "ags/gtk4/app"
 import { Astal, Gtk, Gdk } from "ags/gtk4"
-
+import ControlPanelButton from "./widget/ControlPanel/TaskbarButton"
 import Launcher from "./widget/Launcher"
 import Clock from "./widget/Clock"
 import Pomo from "./widget/Pomo"
@@ -8,6 +8,7 @@ import Workspaces from "./widget/Workspaces"
 import { createBinding, createEffect ,createComputed} from "gnim"
 // @ts-ignore
 import AstalHyprland from "gi://AstalHyprland?version=0.1";
+import Tray from "./widget/Tray"
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
   
@@ -46,18 +47,19 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
       application={app}
       layer={layer.BACKGROUND}
     >
-      <centerbox orientation={Gtk.Orientation.HORIZONTAL}>
+      <centerbox class={"barCenterBox"} orientation={Gtk.Orientation.HORIZONTAL}>
         <box $type="start">
+          <Launcher />
           <Workspaces/>
-          <Pomo/>
+          
 
         </box>
      
-        <box $type="center">
-          <Launcher />
-        </box> 
-   
+    
         <box $type="end">
+            <Pomo/>
+            <Tray/>
+              <ControlPanelButton/>
             <Clock monitor={gdkmonitor}/>
         </box>
       </centerbox>
