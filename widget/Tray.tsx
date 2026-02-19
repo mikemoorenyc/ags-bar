@@ -4,17 +4,21 @@ import app from "ags/gtk4/app"
 import { createBinding, createComputed,  } from "gnim";
 import Graphene from "gi://Graphene?version=1.0";
 import { Astal } from "ags/gtk4";
+import TrayWindow from "./Tray/TrayWindow";
 
 export default function Tray() {
-    const trayPopUp= app.get_window("TRAY_WINDOW") as Astal.Window;
+     let box:Gtk.Widget;
+     return <box/>
+   /* const trayPopUp= app.get_window("TRAY_WINDOW") as Astal.Window;
     if(!trayPopUp) return <label/>;
-    let box:Gtk.Widget;
+   
 
 
     const popupOpen = createBinding(trayPopUp,"visible");
 
     const rotate = createComputed(()=> {
-        return (popupOpen())? "transform:rotate(180deg);":"transform:none;"
+        const iconName = "banana-chevron-up-symbolic"
+        return (popupOpen())? iconName.replace("up","down"):iconName
     })
     const popupState = createComputed(()=>popupOpen()?false:true)
 
@@ -43,19 +47,19 @@ export default function Tray() {
 
     }
 
-
+*/
 
    
+const rotate = "banana-chevron-up-symbolic"
 
-
-    return <button
-            onClicked={()=>{trayPopUp.set_visible(popupState());positionWindow(box,trayPopUp,"left")}}
+    return <menubutton
+    
             $={(self) => {
             box = self
             }}
     class={"button container-spacer"}>
-        <image iconName={"banana-chevron-up-symbolic"} css={rotate}/>
+        <image iconName={rotate} />
 
-      
-    </button>
+      <TrayWindow/>
+    </menubutton>
 }

@@ -90,7 +90,8 @@ export default function TrayWindow() {
     }
        
 
-    return<BarPopUp openPosition="right" windowName="TRAY_WINDOW" outsideClickCheck={outsideClickCheck}>
+    return <popover>
  <TrayInner />
-    </BarPopUp>
+    </popover>
+    
 }

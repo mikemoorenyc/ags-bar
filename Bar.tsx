@@ -9,6 +9,7 @@ import { createBinding, createEffect ,createComputed} from "gnim"
 // @ts-ignore
 import AstalHyprland from "gi://AstalHyprland?version=0.1";
 import Tray from "./widget/Tray"
+import Microphone from "./widget/Microphone"
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
   
@@ -59,6 +60,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
         <box $type="end">
             <Pomo/>
             <Tray/>
+            <Microphone />
               <ControlPanelButton/>
             <Clock monitor={gdkmonitor}/>
         </box>

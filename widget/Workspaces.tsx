@@ -46,11 +46,8 @@ function ClientItem({client}:{client:AstalHyprland.Client}) {
     })
     return <button cssClasses={btnClass} tooltipText={toolTip}  onClicked={()=>{client.focus()}}>
         <box>
-            <image iconName={iconName} pixelSize={16}/>
-        <label  
-        maxWidthChars={16}
-        ellipsize={Pango.EllipsizeMode.END}
-        label={toolTip} class="client-label"/>
+            <image iconName={iconName} pixelSize={20}/>
+
         </box>
     </button>
 }
@@ -74,7 +71,7 @@ const WorkspaceItem = function({item,focused}:{item:any,focused:any}) {
     return <box cssClasses={btnClasses}>
         
         <box><button class={"workspace-button"} label={item.id.toString()} onClicked={()=>{item.focus()}} />
-        <box visible={showClients} css={"padding-right:7px;"}>
+        <box visible={showClients} css={"padding-right:6px;"}>
             <For each={clients}>{
             (client)=><ClientItem client={client} />    
             }</For>
@@ -121,3 +118,9 @@ export default function () {
     */
 
 //<WorkspaceItem focused={focusId()} item={item} />
+
+
+/*        <label  
+        maxWidthChars={16}
+        ellipsize={Pango.EllipsizeMode.END}
+        label={toolTip} class="client-label"/>*/

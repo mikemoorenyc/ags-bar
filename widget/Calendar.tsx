@@ -27,7 +27,7 @@ import Graphene from "gi://Graphene?version=1.0"
       marginBottom={8}
       marginRight={8}
       keymode={Astal.Keymode.EXCLUSIVE}
-      class="Bar"
+      
     >
       <Gtk.EventControllerKey
         onKeyPressed={({ widget: win }, key: number) => {

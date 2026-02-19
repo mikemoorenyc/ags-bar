@@ -53,7 +53,7 @@ export default function () {
         updateTimer(null);
     })
     const stateString = createComputed(()=>state().toString());
-    const pauseButtons = createComputed(()=>state().toString() == "running"?"󰏤":"󰐊")
+    const pauseButtons = createComputed(()=>state().toString() == "running"?"banana-playback-play-symbolic":"banana-playback-pause-symbolic")
 
     const controlsVisible = createComputed(()=> state() !== "stopped")
     const containerClasses = createComputed(()=> {
@@ -95,6 +95,7 @@ export default function () {
       
       }}
     cssClasses={containerClasses}
+    
     tooltipText={toolTipText}>
         <button 
             
@@ -110,15 +111,17 @@ export default function () {
             }}
         />
         <box visible={controlsVisible}>
-            <button class={"control"} label={pauseButtons} onClicked={()=> {
+            <button class={"control"} onClicked={()=> {
                 if(state()== "running") {
 
                     stopTimer(true)
                 } else {
                     startTimer(state()); 
                 }
-            }}/>
-            <button class={"control"} label={"󰓛"} tooltipText={"Stop Pomodoro"} onClicked={()=>{stopTimer()}}></button>
+            }}><image iconName={pauseButtons} pixelSize={16} /></button>
+            <button class={"control"}  tooltipText={"Stop Pomodoro"} onClicked={()=>{stopTimer()}}>
+                <image iconName={"banana-playback-stop-symbolic"} pixelSize={16} />
+            </button>
         </box>
         
 

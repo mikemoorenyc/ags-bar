@@ -4,12 +4,14 @@ $text: #efefef;
 $disabled-text: rgba(255,255,255,.5);
 $window-base: #171412;
 $bg-color: #{"@theme_bg_color"};
-$container-bg: color.adjust($window-base,$lightness:4%);
+$container-bg: color.adjust($window-base,$lightness:2%);
 $container-bg-hover: color.adjust($window-base,$lightness:6%);
 $border-black: $container-bg;
 $primary-yellow:  #e5a50a;
 $yelllow-bg :color.change($primary-yellow, $alpha:.15);
 $hover-bg: rgba(255,255,255,.05);
+$error-color: #da1e28;
+$error-color-lighter: color.change($error-color,$alpha:.25);
 
 
 $font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

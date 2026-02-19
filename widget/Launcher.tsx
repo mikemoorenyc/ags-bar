@@ -16,7 +16,7 @@ export default function Launcher() {
             }
         }
         class={"button launcher-button"}>
-            <image iconName={"banana-launcher-symbolic"} pixelSize={16} />
+            <image iconName={"banana-launcher-symbolic"} pixelSize={20} />
         </button>
 
     </box>

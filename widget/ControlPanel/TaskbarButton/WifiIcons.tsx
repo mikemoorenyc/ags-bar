@@ -1,7 +1,7 @@
 
 //@ts-ignore
-import AstalNetwork from "gi://AstalNetwork"
-import { createBinding,createComputed, createEffect, createState, onCleanup } from "ags"
+
+import { createComputed } from "ags"
 import { execAsync } from "ags/process"
 import { createPoll } from "ags/time"
 

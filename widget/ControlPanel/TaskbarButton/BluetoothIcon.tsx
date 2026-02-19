@@ -11,7 +11,7 @@ export default function BluetoothIcons() {
 
     return (
         <box visible={isVisible} class={"taskbar-icon bluetooth-icon"}>
-            <image iconName={"bluetooth-symbolic"} pixelSize={14} />
+            <image iconName={"banana-bluetooth-symbolic"} pixelSize={16} />
         </box>
     );
 }

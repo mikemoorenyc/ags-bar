@@ -5,7 +5,7 @@ import Calendar from "./widget/Calendar"
 import TrayWindow from "./widget/Tray/TrayWindow"
 app.start({
   css:scss,
-  icons: `${SRC}/icons`,
+  icons: `/home/admin/.config/ags/icons`,
   main() {
    TrayWindow()
      Calendar()
