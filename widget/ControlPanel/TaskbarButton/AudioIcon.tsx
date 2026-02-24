@@ -1,9 +1,9 @@
 
 //@ts-ignore
 import Wp from "gi://AstalWp"
-import { createBinding, createComputed, createEffect } from "ags";
-
-export default function AudioIcon() {
+import { createBinding, createComputed} from "ags";
+import Gtk from "gi://Gtk?version=4.0";
+export default function AudioIcon({type}:{type?:string}) {
 
     const wireplumber = Wp.get_default(); 
 
@@ -25,12 +25,18 @@ export default function AudioIcon() {
 
         return ic.replace("XXXX","0")
     });
+    const classes= createComputed(()=> {
+        return type == "button"?"button":"taskbar-icon"
+    })
+    const size = createComputed(()=> {
+        return type == "button"?20:16
+    })
 
 
 
 
-return <box class={"taskbar-icon"} tooltipText={volString}>
-    <image class={"volume-icon"} iconName={volIcon} pixelSize={16} />
+return <centerbox class={classes} halign={Gtk.Align.CENTER} tooltipText={volString}>
+    <image $type="center" class={"volume-icon"} iconName={volIcon} pixelSize={size} />
 
-</box>
+</centerbox>
 }

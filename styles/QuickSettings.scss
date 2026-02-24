@@ -1,0 +1,63 @@
+@use "./variables.scss" as v; 
+
+.quick-settings-panel {
+    min-width: 360px;
+    .quick-actions {
+        background-color: v.$container-bg;
+        border-top:1px solid v.$border-lighter;
+        padding: 8px;
+    }
+    .quick-action-button {
+        min-height:24px;
+        min-width: 24px;
+        border-radius: 4px;
+        &:hover {
+            background-color: v.$container-bg-hover;
+        }
+    }
+    .row-container{
+        padding: 20px;
+    }
+    .settings-button {
+        border-radius: 4px;
+        background-color: v.$container-bg;
+        border: 1px solid v.$border-lighter;
+        min-height: 48px;
+        &:hover {
+            background-color: v.$container-bg-hover;
+        }
+        &.active {
+            background-color: v.$primary-yellow;
+            color: v.$window-base;
+            &.bluetooth {
+                background-color: v.$bluetooth-blue;
+            }
+        }
+    }
+    .settings-label {
+        font-size: 12px;
+    }
+    flowboxchild {
+        padding: 0;
+        background:none;
+        &:hover {
+            background:none;
+        }
+    }
+    scale {
+
+        trough {
+            background-color: v.$container-bg;
+            min-height:20px
+        }
+        highlight {
+            background-color: v.$primary-yellow;
+        }
+        slider {
+            background-color: v.$text;
+            box-shadow:none;
+
+
+        }
+    }
+}

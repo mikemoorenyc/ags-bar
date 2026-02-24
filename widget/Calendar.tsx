@@ -17,6 +17,7 @@ import Graphene from "gi://Graphene?version=1.0"
         win = self
       
       }}
+
       visible={false}
       name={"CALENDAR_WINDOW"}
       namespace={"CALENDAR_WINDOW"}
@@ -57,6 +58,6 @@ import Graphene from "gi://Graphene?version=1.0"
 }
 export default function () {
     return <Calendar >
-<Gtk.Calendar cssName={"calendar"} class={"popover-styles"}/>
+<Gtk.Calendar cssName={"calendar"} class={"popover-styles-base"}/>
         </Calendar>
 }

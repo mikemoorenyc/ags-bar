@@ -12,7 +12,7 @@ export default function Launcher() {
         
         onClicked={
             ()=> {
-                execAsync("omarchy-menu")
+                execAsync("omarchy-launch-walker")
             }
         }
         class={"button launcher-button"}>

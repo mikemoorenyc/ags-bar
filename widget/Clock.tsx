@@ -4,10 +4,10 @@ import app from "ags/gtk4/app"
 import { createComputed } from "gnim";
 export default function Clock({monitor}:{monitor:Gdk.Monitor}) {
    const time = createPoll("", 1000 * 60, 
-    `date +"%I:%M%p %m/%d/%y"`)
+    `date +"%I:%M%p#%m/%d/%y"`)
     const calendarPopUp = app.get_window("CALENDAR_WINDOW");
-    const timeofday = createComputed(()=>time()?time().split(" ")[0]:"");
-    const date = createComputed(()=>time()?time().split(" ")[1]:"");
+    const timeofday = createComputed(()=>time()?time().split("#")[0]:"");
+    const date = createComputed(()=>time()?time().split("#")[1]:"");
 
     
     

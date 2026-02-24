@@ -118,9 +118,9 @@ export default function () {
                 } else {
                     startTimer(state()); 
                 }
-            }}><image iconName={pauseButtons} pixelSize={16} /></button>
+            }}><image iconName={pauseButtons} pixelSize={14} /></button>
             <button class={"control"}  tooltipText={"Stop Pomodoro"} onClicked={()=>{stopTimer()}}>
-                <image iconName={"banana-playback-stop-symbolic"} pixelSize={16} />
+                <image iconName={"banana-playback-stop-symbolic"} pixelSize={14} />
             </button>
         </box>
         

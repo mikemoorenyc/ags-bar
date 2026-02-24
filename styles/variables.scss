@@ -7,11 +7,16 @@ $bg-color: #{"@theme_bg_color"};
 $container-bg: color.adjust($window-base,$lightness:2%);
 $container-bg-hover: color.adjust($window-base,$lightness:6%);
 $border-black: $container-bg;
+$border-lighter: color.adjust($container-bg,$lightness:2%);
 $primary-yellow:  #e5a50a;
 $yelllow-bg :color.change($primary-yellow, $alpha:.15);
 $hover-bg: rgba(255,255,255,.05);
 $error-color: #da1e28;
 $error-color-lighter: color.change($error-color,$alpha:.25);
+$bluetooth-blue: #0083FC;
+$border-radius: 4px;
+$border-radius-big: 6px;
+$border-radius-huge: 12px;
 
 
 $font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

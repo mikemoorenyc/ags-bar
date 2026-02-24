@@ -3,7 +3,7 @@ tooltip {
     background:v.$text;
     color:v.$window-base;
     font-size: 13px;
-    border-radius:4px;
+    border-radius:v.$border-radius;
     border:1px solid v.$border-black;
     padding:4px 6px;
     font-family: v.$font-mono;
@@ -14,7 +14,7 @@ tooltip {
 }
 @mixin container-style {
     border-radius: 6px;
-    background: v.$container-bg;
+   // background: v.$container-bg;
 }
 .container,.container-spacer {
     @include container-spacer();
@@ -24,7 +24,7 @@ tooltip {
     @include container-style();
     padding:0 8px;
     &.round {
-        border-radius: 4px;
+        border-radius: v.$border-radius;
         padding: 0 4px;
     }
     &:hover {
@@ -45,17 +45,67 @@ tooltip {
         font-size: 16px;
     }
 }
-.button:hover {
+.button:hover,.button.active {
    background:v.$container-bg-hover;
 }
-.popover-styles,popover {
+
+@mixin popover-styles {
     background:v.$window-base;
     border: 1px solid v.$border-black;
-    border-radius: 6px;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.1)
+    border-radius: v.$border-radius-big;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
+    font-size: 14px;
+    padding: 0;
+
+}
+.popover-styles-base {
+    @include popover-styles()
+}
+
+popover.popover-styles{
+   background:none;
+   margin: 0;
+   padding: 0;
+   border:0;
+}
+.popover-styles > contents {
+ @include popover-styles();
+}
+.popover-styles popover > contents {
+    @include popover-styles();
+}
+.popover-styles popover {
+   
+   /* modelbutton {
+        margin: 0px 4px;
+        padding: 6px;
+        border-radius:4px;
+        &:hover {
+            background: v.$container-bg-hover;
+        }
+        radio {
+            min-width:16px;
+            color:currentColor;
+        }
+    }
+    */
+    modelbutton {
+        border-radius:4px;
+        label {
+            font-family: v.$font-sans;
+        }
+        &:hover {
+            background: v.$container-bg-hover;
+        }
+    }
+    separator {
+        background:v.$container-bg;
+        margin: 8px 0;
+        padding: 1px 0 0 0 ;
+    }
 }
 popover {
     *:disabled,*.disabled {
-        color:red; 
+        color:rgba(255,255,255,.5)
     }
 }

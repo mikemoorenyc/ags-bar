@@ -1,5 +1,10 @@
-popover,popover *,popovermenu,popovermenu * , popover arrow, popover contents,tooltip,image,window ,calendar,calendar *{
+separator, menubutton,menubutton contents,tooltip,image,window ,calendar,calendar *{
   all:unset
+}
+popover {
+  > arrow {
+    all:unset;
+  }
 }
 .barCalendar{
   all:unset;

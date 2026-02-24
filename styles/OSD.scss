@@ -1,0 +1,31 @@
+@use "./variables.scss" as v;
+
+
+.osd-container {
+
+    padding: 0 12px;
+    min-height: 48px;
+    font-family: v.$font-mono;
+    border-radius: v.$border-radius-huge;
+    .volume-slider {
+        &-trough {
+            border-radius: v.$border-radius-huge;
+            background-color: v.$border-lighter;
+            min-width: 110px;
+            min-height: 4px;
+            font-size: 1px;
+        }
+        &-highlight {
+            min-height: 4px;
+            background-color: v.$primary-yellow;
+            border-radius: v.$border-radius-big;
+        } 
+    }
+    .volume-number {
+        min-width: 30px;
+        padding: 2px 0;
+        font-size:16px;
+    }
+        
+    
+}

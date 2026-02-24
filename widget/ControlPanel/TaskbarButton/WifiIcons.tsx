@@ -4,51 +4,31 @@
 import { createComputed } from "ags"
 import { execAsync } from "ags/process"
 import { createPoll } from "ags/time"
+import  network from "../../../util/networkService"
 
 type returnData = {
     strength:number,
     connected:boolean,
-    vpn:boolean
+    vpn:boolean,
+    ssid?:string
 }
 export default function WifiIcon() {
-   const networkJSON = createPoll(
-        `{"strength":1,"connected":false,"vpn":false}`,
-        2000,
-        async () => {
-            try {
-                return await execAsync(
-                    "/home/admin/.config/waybar/scripts/network-test.sh"
-                )
-            } catch {
-                return `{"strength":1,"connected":false,"vpn":false}`
-            }
-        }
-    )
 
 
     const data = createComputed(()=> {
-    
-        const net : returnData= JSON.parse(networkJSON());
-        if(!net.connected) {
-            return "wifioff-symbolic"
-        }
-        if(net.vpn) {
-            return "wifiprotected-symbolic";
-        }
-        const str = net.strength.toString()
-        return `wifi${str}-symbolic`
+        const symbol = network.icon();
+        return `banana-${symbol}-symbolic`
     })
-    const boxClass = createComputed(()=> {
-        let cl = "taskbar-icon wifi-icon"
-        if(data() == "wifiprotected-symbolic") {
-            return cl+" protected";
-        }
-        return cl; 
+    const tooltip = createComputed(()=> {
+     
+        if(!network.ssid()) return "No ssid";
+        return network.ssid();
     })
+    const boxClass = createComputed(()=>network.vpn()?"wifi-icon protected":"wifi-icon")
 
  
-    return <box class={boxClass}>
-        <image iconName={data} pixelSize={16} />
+    return <box tooltipText={tooltip} class={boxClass}>
+        <image  iconName={data} pixelSize={16} />
     </box>
 }
 

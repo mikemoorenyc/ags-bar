@@ -18,12 +18,10 @@
         font-size: 13px;
     
     }
-    .taskbar-icon:not(:last-child) {
-        margin-right: 5px;
-    }
+
     .bluetooth-icon {
         font-size:14px;
-        color:#0083FC;
+        color:v.$bluetooth-blue;
     }
     .wifi-icon.protected {
         color: v.$primary-yellow;
