@@ -1,15 +1,14 @@
 
-//@ts-ignore
-import Wp from "gi://AstalWp"
+import AstalWp from "gi://AstalWp"
 import { createBinding, createComputed} from "ags";
 import Gtk from "gi://Gtk?version=4.0";
 export default function AudioIcon({type}:{type?:string}) {
 
-    const wireplumber = Wp.get_default(); 
+    const wireplumber = AstalWp.get_default().audio; 
 
-    const df = createBinding(wireplumber,"default-speaker");
-    const dfVolume = createBinding(df(), "volume");
-    const muted = createBinding(df(), "mute" );
+    const df = AstalWp.get_default()?.audio!.defaultSpeaker!;
+    const dfVolume = createBinding(df, "volume");
+    const muted = createBinding(df, "mute" );
     const volString = createComputed(()=>Math.floor(dfVolume() * 100).toString()+"%");
     const volLevel = createComputed(()=>Math.floor(dfVolume() * 100))
     const volIcon = createComputed(()=>{

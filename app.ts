@@ -4,6 +4,7 @@ import Bar from "./Bar"
 import Calendar from "./widget/Calendar"
 import OSDWindow from "./osd/Window"
 import QuickSettingsWindow from "./widget/QuickSettings/Window" 
+import NotificationsWindow from "./notifications/Window"
 app.start({
   css:scss,
   icons: `/home/admin/.config/ags/icons`,
@@ -11,6 +12,7 @@ app.start({
     QuickSettingsWindow();
      Calendar()
     OSDWindow();
+    NotificationsWindow(); 
     app.get_monitors().map(Bar)
    
   },

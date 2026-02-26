@@ -12,11 +12,14 @@ $primary-yellow:  #e5a50a;
 $yelllow-bg :color.change($primary-yellow, $alpha:.15);
 $hover-bg: rgba(255,255,255,.05);
 $error-color: #da1e28;
+$caution-color: #f1c21b;
 $error-color-lighter: color.change($error-color,$alpha:.25);
 $bluetooth-blue: #0083FC;
 $border-radius: 4px;
 $border-radius-big: 6px;
 $border-radius-huge: 12px;
+
+
 
 
 $font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

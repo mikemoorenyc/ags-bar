@@ -4,13 +4,15 @@ import { Gtk } from "ags/gtk4";
 import Wp from "gi://AstalWp"
 import { createBinding, createComputed, createState ,onCleanup} from "ags";
 import { timeout } from "ags/time";
+import app from "ags/gtk4/app";
 
 export const [visible, setVisible] = createState(false);
 
 
 export default function OSD() {
-    const wireplumber = Wp.get_default(); 
-    const speaker = wireplumber?.get_default_speaker();
+
+    const quickSettingsWindow = app.get_window("QUICKSETTINGS_WINDOW");
+
 
     let firstStart = true;
     let count = 0;
@@ -28,9 +30,9 @@ export default function OSD() {
       });
     }
     
-    const df = createBinding(wireplumber,"default-speaker");
-    const dfVolume = createBinding(df(), "volume");
-    const muted = createBinding(df(), "mute" );
+    const df = Wp.get_default()?.audio!.defaultSpeaker!;
+    const dfVolume = createBinding(df, "volume");
+    const muted = createBinding(df, "mute" );
     const volLevel = createComputed(()=>Math.floor(dfVolume() * 100))
     const volIcon = createComputed(()=>{
         const ic = "banana-speaker-XXXX-symbolic";
@@ -52,21 +54,23 @@ export default function OSD() {
     return <box 
     $={self => {
         timeout(500, () => (firstStart = false));
-        if(!speaker) {
+        if(!df) {
             console.log("no speaker");
             return ; 
         }
-        const volumeconnect = speaker.connect("notify::volume", () => {
+        const volumeconnect = df.connect("notify::volume", () => {
                   if (firstStart) return;
+                  if(quickSettingsWindow && quickSettingsWindow.visible) return ;
                   show();
         });
-        const muteconnect = speaker.connect("notify::mute", () => {
+        const muteconnect = df.connect("notify::mute", () => {
             if (firstStart) return;
+            if(quickSettingsWindow && quickSettingsWindow.visible) return ; 
             show();
         });
         onCleanup(() => {
-            speaker.disconnect(volumeconnect);
-            speaker.disconnect(muteconnect);
+            df.disconnect(volumeconnect);
+            df.disconnect(muteconnect);
         });
     }}
     

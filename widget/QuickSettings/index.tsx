@@ -24,8 +24,11 @@ export default function ({windowName}:QuickSettingsProps) {
     }
     
     if(window)return <box />
+
+   
     
     return <box orientation={Gtk.Orientation.VERTICAL} class={"quick-settings-panel popover-styles-base"}>
+
       <box class={"row-container"} orientation={Gtk.Orientation.VERTICAL} spacing={20}>
         <Gtk.FlowBox class={"button-row"} 
         maxChildrenPerLine={3}

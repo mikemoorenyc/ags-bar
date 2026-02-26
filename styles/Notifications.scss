@@ -1,0 +1,19 @@
+@use "./variables.scss" as v;
+.notification-popup {
+    padding-bottom:12px;
+    border-radius: v.$border-radius-huge;
+    .header {
+        padding: 6px 6px 0 12px;
+    }
+    .summary {
+        font-weight: bold;
+        font-size: 16px;
+    }
+    .text {
+        padding: 0 12px;
+    }
+    .body {
+        font-size:14px;
+        padding-top: 6px;
+    }
+}

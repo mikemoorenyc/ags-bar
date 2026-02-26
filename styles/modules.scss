@@ -1,4 +1,5 @@
 @use "./variables.scss" as v; 
+@use "sass:color";
 tooltip {
     background:v.$text;
     color:v.$window-base;
@@ -39,15 +40,25 @@ tooltip {
     min-width:32px;
     font-family: 'JetBrainsMono Nerd Font Mono', "Noto Color Emoji";
     font-size:24px;
+    &:hover,&.active {
+        background:v.$container-bg-hover;
+        color:v.$text;
+
+    }
     &.sm {
         min-width: 24px;
         min-height: 24px;
         font-size: 16px;
     }
+    &.reverse {
+        color: v.$window-base;
+        &:hover,&.button.active{
+            color:v.$window-base ;
+            background-color: color.adjust(v.$text,$blackness:20%)
+        }
+    }
 }
-.button:hover,.button.active {
-   background:v.$container-bg-hover;
-}
+
 
 @mixin popover-styles {
     background:v.$window-base;
@@ -59,7 +70,11 @@ tooltip {
 
 }
 .popover-styles-base {
-    @include popover-styles()
+    @include popover-styles();
+    &.reverse { 
+        background: v.$text;
+        color: v.$window-base;
+    }
 }
 
 popover.popover-styles{
