@@ -47,16 +47,17 @@ export default function () {
     $={self => {
         notifd.set_default_timeout(5000);
         
+        
 
     }
 
     }
     >
 
-       <Adw.Clamp maximumSize={344}>
+       <Adw.Clamp maximumSize={360}>
 
          
-         <box widthRequest={344} spacing={8} orientation={Gtk.Orientation.VERTICAL}>
+         <box widthRequest={360} spacing={8} orientation={Gtk.Orientation.VERTICAL}>
            <For each={list}>{
                (n) => <Notification n={n} />
             }</For>

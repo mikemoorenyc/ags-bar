@@ -1,19 +1,55 @@
 @use "./variables.scss" as v;
 .notification-popup {
-    padding-bottom:12px;
+  
     border-radius: v.$border-radius-huge;
+    &.critical {
+        box-shadow: inset 4px 0px 0 v.$error-color;
+        border-color:v.$error-color;
+    }
+    &.urgent {
+        box-shadow: inset 4px 0 0 v.$caution-color;
+        border-color: v.$caution-color;
+    }
     .header {
-        padding: 6px 6px 0 12px;
+    
+    }
+    .dismiss-button {
+        padding-top:12px; padding-right:12px;padding-bottom:0; padding-left:6px;
+        &:hover {
+            color: rgba(0,0,0,.70)
+        }
+    }
+    .header-data {
+        padding-top: 6px
+    }
+    .timestamp {
+        font-size: 12px;
     }
     .summary {
-        font-weight: bold;
+        font-weight: 600;
         font-size: 16px;
     }
+    .content {
+        padding: 0 12px 14px 12px;
+    }
     .text {
-        padding: 0 12px;
+        padding-right:12px;
     }
     .body {
         font-size:14px;
-        padding-top: 6px;
+        padding-top: 2px;
+    }
+    .containing-box {
+        padding-left:12px;
+        padding-bottom:14px;
+    }
+    .image-box {
+        padding-top:12px;
+        &.urgent {
+            color: v.$caution-color
+        }
+        &.critical {
+            color: v.$error-color
+        }
     }
 }

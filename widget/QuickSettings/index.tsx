@@ -41,9 +41,11 @@ export default function ({windowName}:QuickSettingsProps) {
             <BluetoothButton closeWindow={closeWindow} />
             <NetworkButton closeWindow={closeWindow} />
             <Button buttonClick={async ()=> {
-                
-                exec("hyprpicker")
                 closeWindow(); 
+                execAsync("hyprpicker -a");
+                
+                
+                
             }} label={"Colorpicker"} iconName="colorpicker" exec="hyprpicker" />
             <Button buttonClick={async ()=> {
                 closeWindow(); 
@@ -51,7 +53,7 @@ export default function ({windowName}:QuickSettingsProps) {
             }} label={"Screen capture"} iconName="screenshot" />
             <Button buttonClick={async ()=> {
                 closeWindow(); 
-                execAsync("omarchy-menu screenrecord")
+                execAsync("banana-cmd-screenrecord")
             }} label={"Screen record"}  iconName="screenrecord" />
           
             <NightlightButton />

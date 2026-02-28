@@ -1,7 +1,7 @@
 @use "./variables.scss" as v; 
 
 .quick-settings-panel {
-    //min-width: 360px;
+    min-width: 360px;
     .quick-actions {
         background-color: v.$container-bg;
         border-top:1px solid v.$border-lighter;

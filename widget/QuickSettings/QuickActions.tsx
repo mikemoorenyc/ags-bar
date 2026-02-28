@@ -32,7 +32,7 @@ export default function QuickActions({closeWindow}:QuickActions) {
     const actionButtons : TActionSchema = [
         ["colorpicker","hyprpicker"],
         ["screenshot","omarchy-cmd-screenshot"],
-        ["screenrecord","omarchy-menu screenrecord"]
+        ["screenrecord","banana-cmd-screenrecord"]
     ]
     return <centerbox class={"quick-actions"}>
         <box $type="start" spacing={2}>

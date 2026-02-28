@@ -19,7 +19,7 @@ export default function MicIcon() {
 
     const buttonClasses = createComputed(()=> {
         let classes = "mic-button button container-spacer";
-        return micMuted()? classes+" muted":classes
+        return micMuted()? classes+" alert":classes+" active"
     })
     const clickMute = async()=> {
         console.log("clicked");

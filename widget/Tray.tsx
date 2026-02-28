@@ -72,7 +72,7 @@ export default function Tray() {
 
     }
     const layoutArray: Accessor<AstalTray.TrayItem[][]> = createComputed(()=> {
-        const layout :number[][] = [];
+        const layout :AstalTray.TrayItem[][] = [];
         const it = items(); 
         const rows = Math.floor(it.length/4);
         for(let i = 0; i < rows;i++) {

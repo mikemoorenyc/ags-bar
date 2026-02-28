@@ -8,6 +8,7 @@ import NotificationsWindow from "./notifications/Window"
 app.start({
   css:scss,
   icons: `/home/admin/.config/ags/icons`,
+  instanceName: "my-shell",
   main() {
     QuickSettingsWindow();
      Calendar()
@@ -17,3 +18,4 @@ app.start({
    
   },
 })
+  

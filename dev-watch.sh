@@ -12,7 +12,7 @@ start_ags() {
 stop_ags() {
   if [[ -n "$AGS_PID" ]] && kill -0 "$AGS_PID" 2>/dev/null; then
     echo "🛑 Stopping AGS..."
-    ags quit
+    ags -i my-shell quit
     wait "$AGS_PID" 2>/dev/null
   fi
 }

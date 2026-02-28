@@ -10,6 +10,9 @@ import { createBinding, createEffect ,createComputed} from "gnim"
 import AstalHyprland from "gi://AstalHyprland?version=0.1";
 import Tray from "./widget/Tray"
 import Microphone from "./widget/Microphone"
+import { exec } from "ags/process"
+import ScreenRecording from "./widget/ScreenRecording"
+
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
   
@@ -47,6 +50,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
       anchor={BOTTOM | LEFT | RIGHT}
       application={app}
       layer={layer.BACKGROUND}
+ 
     >
       <centerbox class={"barCenterBox"} orientation={Gtk.Orientation.HORIZONTAL}>
         <box $type="start">
@@ -58,6 +62,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
      
     
         <box $type="end">
+            <ScreenRecording />
             <Pomo/>
             <Tray/>
             <Microphone />

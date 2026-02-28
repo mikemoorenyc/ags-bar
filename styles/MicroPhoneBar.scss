@@ -1,10 +1,9 @@
 @use "./variables.scss" as v; 
 .mic-button {
-        background: v.$primary-yellow;
-        color:v.$window-base;
+ 
         
         &:not(.muted):hover {
-            background-color: v.$primary-yellow;
+            
           //  box-shadow: inset 1px 1px 0 v.$primary-yellow, inset -1px -1px v.$primary-yellow, inset -1px 1px 0 v.$primary-yellow, inset 1px -1px v.$primary-yellow;;
         }
     &.muted {

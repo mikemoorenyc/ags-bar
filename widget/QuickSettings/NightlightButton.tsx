@@ -32,6 +32,8 @@ export default function() {
 
     const clickedButton = async () => {
         execAsync(command())
+        .then((out) => console.log(out))
+        .catch((err) => console.error(err))
         if(active()) {
             updateActive(false);
         } else {

@@ -22,7 +22,7 @@ export default function OSD() {
    
       count++;
 
-      timeout(.75 * 1000, () => {
+      timeout(1 * 1000, () => {
          count--;
          if (count === 0) {
             setVisible(false)

@@ -50,6 +50,20 @@ tooltip {
         min-height: 24px;
         font-size: 16px;
     }
+    &.alert {
+        background-color: v.$error-color;
+        color:v.$text;
+        &:hover {
+            background-color: v.$error-color-hover;
+        }
+    }
+    &.active {
+        background-color: v.$primary-yellow;
+        color:v.$window-base;
+        &:hover {
+            background-color: v.$primary-yellow-hover;
+        }
+    }
     &.reverse {
         color: v.$window-base;
         &:hover,&.button.active{
