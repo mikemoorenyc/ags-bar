@@ -36,7 +36,7 @@ export default function QuickActions({closeWindow}:QuickActions) {
     ]
     return <centerbox class={"quick-actions"}>
         <box $type="start" spacing={2}>
-            <QuickActionButton iconName={"banana-shutdown-symbolic"} exec="omarchy-menu system" closeWindow={closeWindow} tooltip={"Shutdown"}/>
+            <QuickActionButton iconName={"banana-shutdown-symbolic"} exec="ags request launcherstate system --instance my-shell" closeWindow={closeWindow} tooltip={"Shutdown"}/>
             
 
         </box>

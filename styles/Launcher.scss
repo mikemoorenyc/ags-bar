@@ -2,3 +2,44 @@
 .launcher-button {
     color: v.$primary-yellow;
 }
+
+
+
+.launcher {
+    .launcher-menu {
+        min-width: 320px;
+        &.app {
+            min-width: 800px;
+        }
+    }
+    .header {
+        padding: 18px 22px;
+        background: v.$container-bg;
+        border-bottom:1px solid v.$border-lighter;
+        border-top-left-radius: v.$border-radius-huge;
+        border-top-right-radius: v.$border-radius-huge;
+        border-top: 1px solid v.$border-black;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
+        &-text {
+            font-size: 24px;
+            font-weight: 700;
+        }
+    }
+    .menu-list {
+        padding: 18px;
+        border-bottom-left-radius: v.$border-radius-huge;
+        border-bottom-right-radius: v.$border-radius-huge;
+        background-color: v.$window-base;
+    }
+    .list-button {
+        padding: 16px;
+        border-radius: v.$border-radius-big;
+        &.active {
+            background-color: v.$primary-yellow;
+            color: v.$window-base;
+        }
+        &-text {
+            font-size:18px;
+        }
+    }
+}

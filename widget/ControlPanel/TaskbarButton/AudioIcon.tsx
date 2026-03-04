@@ -4,7 +4,7 @@ import { createBinding, createComputed} from "ags";
 import Gtk from "gi://Gtk?version=4.0";
 export default function AudioIcon({type}:{type?:string}) {
 
-    const wireplumber = AstalWp.get_default().audio; 
+ 
 
     const df = AstalWp.get_default()?.audio!.defaultSpeaker!;
     const dfVolume = createBinding(df, "volume");
