@@ -10,6 +10,7 @@
         min-width: 320px;
         &.app {
             min-width: 800px;
+         
         }
     }
     .header {
@@ -25,11 +26,14 @@
             font-weight: 700;
         }
     }
-    .menu-list {
-        padding: 18px;
+    .menu-container {
         border-bottom-left-radius: v.$border-radius-huge;
         border-bottom-right-radius: v.$border-radius-huge;
         background-color: v.$window-base;
+    }
+    .menu-list {
+        padding: 18px;
+        
     }
     .list-button {
         padding: 16px;
@@ -42,4 +46,32 @@
             font-size:18px;
         }
     }
+    .app-entry-container {
+        background-color: v.$window-base;
+    }
+    .app-entry-container {
+        padding: 24px;
+        .entry {
+            all: unset;
+            border:1px solid v.$border-lighter;
+            background-color: v.$container-bg-hover;
+            color: v.$text;
+            font-size: 18px;
+            font-family: v.$font-sans;
+            padding: 12px; 
+            border-radius: v.$border-radius-big;
+        }
+        
+    }
+    .app-list-container {
+        padding:0 24px 24px 24px;
+    }
+    .app-item-container {
+        padding: 18px;
+        border-radius: v.$border-radius-big;
+        &.active {
+            background-color: v.$primary-yellow;
+        }
+    }
+    
 }

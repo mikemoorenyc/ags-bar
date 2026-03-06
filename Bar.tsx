@@ -12,6 +12,7 @@ import Tray from "./widget/Tray"
 import Microphone from "./widget/Microphone"
 import { exec } from "ags/process"
 import ScreenRecording from "./widget/ScreenRecording"
+import UpdateAvailable from "./widget/UpdateAvailable"
 
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
@@ -58,6 +59,9 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
           <Workspaces/>
           
 
+        </box>
+        <box $type="center">
+          <UpdateAvailable />
         </box>
      
     

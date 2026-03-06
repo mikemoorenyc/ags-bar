@@ -34,6 +34,7 @@ const ListItem = ({item,index}:ListItemProps) => {
    
     return (
     <button 
+    
     $={(self)=> {
 
     }}
@@ -162,6 +163,7 @@ export default function Menu({state,window}:{state:null|string,window:Astal.Wind
 
 
     }}
+    
     >   
         <KeyController 
         upFunction={()=> {
@@ -192,14 +194,14 @@ export default function Menu({state,window}:{state:null|string,window:Astal.Wind
         
         />
         
-        <Adw.Clamp maximumSize={600}>   
+        <Adw.Clamp maximumSize={320}>   
             <box overflow={Gtk.Overflow.HIDDEN} orientation={Gtk.Orientation.VERTICAL} class={"launcher-menu"}>
                 <box class={"header"}>
                     <label label={titleLabel} class={"header-text"}/>
                 </box>
                 <scrolledwindow propagateNaturalHeight={true} maxContentHeight={800}>
       
-                <box class={"menu-list"} vexpand>
+                <box class={"menu-list menu-container"} vexpand>
                 <With value={buttonList}>
                 {list => {
                     const inside = !list?<box/> : list.map((m,i)=><ListItem item={m}  index={i}/>)
