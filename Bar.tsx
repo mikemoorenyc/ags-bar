@@ -45,12 +45,13 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
     <window
       visible={isVisible}
       name="bar"
+      namespace={"BAR_WINDOW"}
       class="Bar"
       gdkmonitor={gdkmonitor}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
       anchor={BOTTOM | LEFT | RIGHT}
       application={app}
-      layer={layer.BACKGROUND}
+      layer={layer.BOTTOM}
  
     >
       <centerbox class={"barCenterBox"} orientation={Gtk.Orientation.HORIZONTAL}>

@@ -1,8 +1,10 @@
 import { Gtk } from "ags/gtk4";
-import Adw from "gi://Adw?version=1";
+
 import AstalNotifd from "gi://AstalNotifd?version=0.1";
 import { createComputed } from "gnim";
 import GLib from "gi://GLib?version=2.0";
+import { For } from "gnim";
+import Pango from "gi://Pango?version=1.0";
 
 
 export default function ({n}:{n:AstalNotifd.Notification}) {
@@ -61,11 +63,12 @@ export default function ({n}:{n:AstalNotifd.Notification}) {
     if(imagePath) {
         headerIcon = undefined;
     }
+    const actions = createComputed(()=>[...n.actions]);
 
     
      return   <box
      cssClasses={["popover-styles-base","reverse","notification-popup",cautionClass]}
-      widthRequest={360} orientation={Gtk.Orientation.VERTICAL}>
+      widthRequest={420} orientation={Gtk.Orientation.VERTICAL}>
         <box spacing={8} class={"containing-box"}>
             {showImage&&<box cssClasses={["image-box",cautionClass]} valign={Gtk.Align.START} homogeneous={false}>
                 <image  file={imagePath} vexpand={false}  iconName={headerIcon} pixelSize={36}/>
@@ -89,9 +92,24 @@ export default function ({n}:{n:AstalNotifd.Notification}) {
 
 
             </box>
+          
 
         </box>
         
+          <box class={"action-button-container"} spacing={4} visible={n.actions.length > 0} >
+            <For each={actions} id={action=>action.id}>
+            {action => <button class={"action-button"}
+     
+            onClicked={()=>{
+                action.invoke();
+                n.dismiss(); 
+            }}
+            >
+                <label label={action.label.toUpperCase()}/>
+                
+                </button>}
+            </For>
+            </box>
        
         
 

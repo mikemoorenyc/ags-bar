@@ -1,6 +1,6 @@
 @use "./variables.scss" as v;
 .notification-popup {
-  
+    padding-bottom:14px;
     border-radius: v.$border-radius-huge;
     &.critical {
         box-shadow: inset 4px 0px 0 v.$error-color;
@@ -41,7 +41,7 @@
     }
     .containing-box {
         padding-left:12px;
-        padding-bottom:14px;
+        
     }
     .image-box {
         padding-top:12px;
@@ -50,6 +50,21 @@
         }
         &.critical {
             color: v.$error-color
+        }
+    }
+    .action-button-container {
+        padding: 8px 12px 0 12px;
+    }
+    .action-button {
+        text-transform:uppercase;
+        font-size: 12px;
+        font-weight: 600;
+        color:v.$text;
+        border-radius: 4px;
+        background:v.$container-bg;
+        padding: 6px 8px;
+        &:hover {
+            background-color: v.$container-bg-hover;
         }
     }
 }

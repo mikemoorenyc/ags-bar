@@ -1,42 +1,54 @@
 import { interval, Timer } from "ags/time";
 import { createComputed, createState } from "gnim"
 import { execAsync } from "ags/process";
+import { monitorFile, readFileAsync } from "ags/file";
+
+const checkPath = "/home/admin/.cache/arch-updates"
 
 export default function UpdateAvailable() {
     const [isVisible,updateIsVisible] = createState(false); 
-    let checker:Timer
-    
-    const updateCheck = async () => {
-        try {
-        const avail = await execAsync("omarchy-update-available");
-        console.log(avail);
-          
-               if(avail.includes("Omarchy update available")) {
-                updateIsVisible(true)
-                return ;
-               }
-               updateIsVisible(false)
-
-            } catch {
-                updateIsVisible(false)
-            }
-    }
    
+    let monitor;
     
+    
+    const readFile = async () => {
+        try {
+            const state = await readFileAsync(checkPath);
+            if(parseInt(state)===0) {
+                updateIsVisible(false)
+            } else {
+                updateIsVisible(true)
+            }
+        } catch {
+            console.log("couldn't check")
+        }
+        
+    }
 
-    const intervalLength = 1000*60*35
+    
     return <box visible={isVisible}
     $={self => {
-        checker = interval(intervalLength,()=> {
-            updateCheck(); 
+        
+        readFile(); 
+        monitor = monitorFile(checkPath,()=> {
+            readFile(); 
         })
+
     }
 
     }
     
     >
         <button class={"container-spacer button active"} onClicked={()=>{
-            execAsync("omarchy-launch-floating-terminal-with-presentation omarchy-update")}}>
+            execAsync([
+  "foot",
+  "-e",
+  "bash",
+  "-c",
+  "sudo pacman -Syu; ~/.config/scripts/check-arch-updates.sh"
+])
+            
+            }}>
             <image iconName={"banana-sync-symbolic"} pixelSize={18}/>
         </button>
     </box>

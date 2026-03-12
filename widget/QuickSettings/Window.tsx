@@ -21,7 +21,7 @@ export default function QuickSettings() {
         visible={false}
         name={windowName}
         namespace={windowName}
-        layer={Astal.Layer.TOP}
+        layer={Astal.Layer.OVERLAY}
         application={app}
         anchor={BOTTOM|RIGHT}
         monitor={0}

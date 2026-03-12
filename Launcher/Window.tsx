@@ -27,7 +27,7 @@ export const launcherSignal = (signal:string) => {
 
 export default function () {
     
-    
+    const [backstate,updateBackstate] = createState<null|string>(null)
     const {BOTTOM,LEFT,RIGHT,TOP} = Astal.WindowAnchor
     let win:Astal.Window;    
     let box: Gtk.Box
@@ -46,6 +46,22 @@ export default function () {
     $={self=> {
         win=self
         child = win.child
+        visibleWatcher = app.connect("request",(app, [cmd, arg, ...rest], response)=> {
+            if(cmd !== "launcherstate") return ;
+
+            const backs=rest.find(r => r.startsWith("backstate="));
+            if(backs) {
+                updateBackstate(backs.split("=")[1])
+            } else {
+                updateBackstate(null)
+            }
+            launcherSignal(arg)
+
+            response(arg);
+        })
+        onCleanup(()=> {
+            app.disconnect(visibleWatcher);
+        })
 
        
      
@@ -63,7 +79,7 @@ export default function () {
     }
     widthRequest={500}
     heightRequest={500}
-
+    layer={Astal.Layer.OVERLAY}
     keymode={Astal.Keymode.EXCLUSIVE}
     >
     
@@ -100,12 +116,12 @@ export default function () {
                 return <box/>
             }
             if(state == "apps") {
-                return <AppWindow window={win} />
+                return <AppWindow window={win} backstate={backstate}/>
             }
             if(state == "empty") {
                 return <box/>
             }
-            return <Menu window={win} state={state} />
+            return <Menu window={win} state={state} backstate={backstate} />
         }
         return <box>
             {tester(state)}

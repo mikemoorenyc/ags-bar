@@ -1,18 +1,20 @@
-import { readFile, readFileAsync } from "ags/file"
+import {  readFileAsync } from "ags/file"
 import { Astal, Gdk, Gtk } from "ags/gtk4";
 import Adw from "gi://Adw?version=1";
-import { Accessor, createComputed, createState, onCleanup, With } from "gnim";
+import { Accessor, createComputed,  createState, onCleanup, With } from "gnim";
 import Pango from "gi://Pango?version=1.0";
 import { execAsync} from "ags/process";
-import KeyController from "./KeyController";
+import getMenus from "./getMenus";
+import Header from "./Header";
 
-type MenuItem = {
+
+export type MenuItem = {
     label:string, 
     icon:string, 
     exec:string
 }
 
-type Menu = {
+export type Menu = {
     title:string,
     slug:string, 
     items: MenuItem[]
@@ -20,26 +22,28 @@ type Menu = {
 export const [currentActive,updateCurrentActive] = createState(0)
 
 
-
 type ListItemProps = JSX.IntrinsicElements["button"] & {
     item:MenuItem,
     index:number,
-
+    window:Astal.Window
 }
 
-const ListItem = ({item,index}:ListItemProps) => {
+const ListItem = ({item,index,window}:ListItemProps) => {
     const classes = createComputed(()=> {
         return currentActive() === index ? "list-button active":"list-button"
     })
+
    
     return (
     <button 
     
     $={(self)=> {
 
+
     }}
+
     onClicked={()=> {
-      
+        window.hide(); 
          execAsync(item.exec)
     }}
     class={classes} hexpand={true} >
@@ -61,56 +65,18 @@ const ListItem = ({item,index}:ListItemProps) => {
    
 }
 
-export default function Menu({state,window}:{state:null|string,window:Astal.Window}) {
+export default function Menu({state,window,backstate}:{state:null|string,window:Astal.Window,backstate:Accessor<string|null>}) {
     const [menus,updateMenus] =createState<Menu[]>([])
     const [ready,updateReady] = createState(false);
     let box:Gtk.Box;
     let visibleWatcher:number
     
     const getMenu = async() => {
-        const raw = (await readFileAsync("/home/admin/.config/ags/launcher-menus.txt")).split("\n\n").filter(n=>n.trim().length > 1);
-        const menus:Menu[]=[]
-    
-        raw.forEach(r=> {
-            const broken = r.split("\n");
-            if(broken.length < 3) return ; 
-            if(broken[0].startsWith("slug") == false||broken[1].startsWith("title")==false) {
-                return ; 
-            }
-            let slug = broken[0].replace("slug:","").trim();
-            let title = broken[1].replace("title:","").trim(); 
-            broken.shift();
-            broken.shift();
-            let items = broken.map(i => {
-                let b = i.split(",");
-                if(b.length !== 3) return {
-                    label:"",
-                    exec:"",
-                    icon:""
-                };
-                return {
-                    label: b[0].trim(),
-                    exec: b[1].trim(),
-                    icon: b[2].trim()
-                }
-            })
-            menus.push({
-                items,
-                slug,
-                title
-            })
-        })
+        const menus = await getMenus(); 
         updateMenus(menus);
-
-      
     }
     const currentMenu = createComputed(()=> {
         return menus().find(m=>m.slug == state);
-    })
-
-    const currentMenuLength = createComputed(()=> {
-        if(!currentMenu()) return -1; 
-        if(currentMenu() && currentMenu()?.items) return currentMenu()?.items.length;
     })
 
 
@@ -139,6 +105,7 @@ export default function Menu({state,window}:{state:null|string,window:Astal.Wind
 
     })
     
+    let fakeInput:Gtk.Entry;
 
 
     return <box 
@@ -147,64 +114,98 @@ export default function Menu({state,window}:{state:null|string,window:Astal.Wind
     $={async self=> {
         getMenu(); 
         box = self; 
-        self.set_focusable(true);
-        visibleWatcher = box.connect("notify::visible",()=> {
-            if(box.get_visible()) {
-               
-                box.grab_focus(); 
+        visibleWatcher = window.connect("notify::visible",()=> {
+
+            if(window.get_visible()) {      
+                fakeInput.grab_focus(); 
+            } else {
+                updateCurrentActive(0)
             }
         })
-        updateReady(true);
         onCleanup(()=> {
-            box.disconnect(visibleWatcher);
+            window.disconnect(visibleWatcher);
 
         })
-
-
-
     }}
     
     >   
-        <KeyController 
-        upFunction={()=> {
-            if(!ready()||!visible()) return true; 
-            if(currentActive() <1) return true; 
-            updateCurrentActive(currentActive()-1);
-            return true; 
-        }}
-        downFunction={()=> {
-            if(!ready()||!visible()) return true;
-            if(!currentMenuLength()) return true; 
-            if(currentActive() == currentMenuLength()! - 1) return true
-            updateCurrentActive(currentActive()+1)  
-            return true 
-        }}
-        escapeFunction={()=> {
-            if(!ready()||!visible()) return true;
-            window.hide();
-            return true; 
-        }}
-        returnFunction={()=> {
-            if(!ready()||!visible()) return true;
-            if(!currentMenu()|| !currentMenu()?.items) return true; 
-             
-            execAsync(currentMenu()?.items[currentActive()].exec!)
-            return true;
-        }}
+    
         
-        />
-        
-        <Adw.Clamp maximumSize={320}>   
+        <Adw.Clamp maximumSize={400}>   
             <box overflow={Gtk.Overflow.HIDDEN} orientation={Gtk.Orientation.VERTICAL} class={"launcher-menu"}>
-                <box class={"header"}>
-                    <label label={titleLabel} class={"header-text"}/>
-                </box>
+                <entry 
+                $={self => {
+                    fakeInput=self; 
+                    setTimeout(()=> {
+                        fakeInput.grab_focus(); 
+                    },100  )
+                }
+
+                }
+                onActivate={()=> {
+                    const bl = buttonList(); 
+                    const i = currentActive();
+                    if(bl) {
+                        window.hide()
+                        execAsync(bl[i].exec)
+                    }
+                    
+                     
+                    
+               
+                   
+                }}
+                class="fake-entry">
+                <Gtk.EventControllerKey
+                onKeyPressed={(_,key)=>{
+                    
+                    if(key==Gdk.KEY_Escape) {
+                        if(backstate && backstate()) {
+                            execAsync(`ags request launcherstate ${backstate()} -i my-shell`)
+                            return
+                        }
+                        window.hide();
+                        return true;  
+                    }
+                    if(key == Gdk.KEY_Up) {
+                        const bl = buttonList();
+                        if(bl) {
+                            if(currentActive() === 0) {
+                                updateCurrentActive(bl.length - 1);
+                                return true
+                            }
+                            updateCurrentActive(currentActive() - 1);
+                            return true
+
+                        }
+                      
+                     
+                        return true;
+                    }
+                    if(key==Gdk.KEY_Down) {
+                        const bl = buttonList(); 
+                        if(bl && currentActive() === bl.length -1) {
+                            updateCurrentActive(0)
+                            return true; 
+                        }   
+                        if(bl ) {
+                            updateCurrentActive(currentActive() + 1);
+                            return true;
+                        }
+                    }
+                    return true; 
+                    
+                }}
+                
+                />
+                </entry>
+                <Header label={titleLabel} backstate={backstate}/>
                 <scrolledwindow propagateNaturalHeight={true} maxContentHeight={800}>
       
                 <box class={"menu-list menu-container"} vexpand>
                 <With value={buttonList}>
                 {list => {
-                    const inside = !list?<box/> : list.map((m,i)=><ListItem item={m}  index={i}/>)
+                    const inside = !list?<box/> : list.map((m,i)=><ListItem item={m}  index={i}window={window}/>)
                     return <box hexpand={true} orientation={Gtk.Orientation.VERTICAL}>
                        
                        {inside}
@@ -223,37 +224,3 @@ export default function Menu({state,window}:{state:null|string,window:Astal.Wind
     </box>
 }
 
-
-/*
- <Gtk.EventControllerKey 
-        
-        onKeyReleased={(_,key)=> {
-            if(!ready()||!visible()) return true; 
-            if(key == Gdk.KEY_Down) {
-                if(!currentMenuLength()) return true; 
-                if(currentActive() == currentMenuLength()! - 1) return true
-                updateCurrentActive(currentActive()+1)
-            }
-         
-            if(key == Gdk.KEY_Escape) {
-                window.hide();
-              
-                return true; 
-            }
-            if(key==Gdk.KEY_Up) {
-                if(currentActive() <1) return true; 
-                updateCurrentActive(currentActive()-1);
-            }
-            
-            if(key == Gdk.KEY_Return) {
-    
-                if(!currentMenu()|| !currentMenu()?.items) return true; 
-             
-                execAsync(currentMenu()?.items[currentActive()].exec!)
-            }
-
-            return true
-        }}
-        
-        />
-*/

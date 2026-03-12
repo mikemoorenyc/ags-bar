@@ -41,19 +41,23 @@ export default function ({windowName}:QuickSettingsProps) {
             <BluetoothButton closeWindow={closeWindow} />
             <NetworkButton closeWindow={closeWindow} />
             <Button buttonClick={async ()=> {
+                const t= await execAsync("hyprpicker -a");
+              
                 closeWindow(); 
-                execAsync("hyprpicker -a");
+                
                 
                 
                 
             }} label={"Colorpicker"} iconName="colorpicker" exec="hyprpicker" />
             <Button buttonClick={async ()=> {
+                await execAsync("omarchy-cmd-screenshot")
                 closeWindow(); 
-                execAsync("omarchy-cmd-screenshot")
+                
             }} label={"Screen capture"} iconName="screenshot" />
             <Button buttonClick={async ()=> {
+               await execAsync("banana-cmd-screenrecord")
                 closeWindow(); 
-                execAsync("banana-cmd-screenrecord")
+            
             }} label={"Screen record"}  iconName="screenrecord" />
           
             <NightlightButton />

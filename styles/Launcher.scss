@@ -67,11 +67,43 @@
         padding:0 24px 24px 24px;
     }
     .app-item-container {
-        padding: 18px;
+        padding: 12px;
         border-radius: v.$border-radius-big;
+        .description {
+            color:v.$disabled-text;
+        }
         &.active {
             background-color: v.$primary-yellow;
+            color:v.$window-base;
+            .description {
+                color:v.$window-base; 
+            }
         }
+        .text {
+            padding-left: 8px;
+            .title {
+                font-weight:600;
+                font-size:20px;
+            }
+            .description {
+                font-size:14px;
+            }
+        }
+        .pin-container {
+            padding: 0 8px;
+        }
+    }
+    .pinned-apps-header {
+        font-weight: 600;
+        font-size:16px;
+        margin-bottom:8px;
+    }
+
+    .fake-entry {
+        all:unset;
+        background:rgba(0,0,0,0);
+        color:rgba(0,0,0,0);
+        font-size:.00001px; 
     }
     
 }

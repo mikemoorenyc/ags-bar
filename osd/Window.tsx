@@ -14,6 +14,7 @@ export default function () {
     application={app}
     anchor={BOTTOM|LEFT|RIGHT}
     marginBottom={48}
+    keymode={Astal.Keymode.NONE}
     >
         <OSD />
     </window>

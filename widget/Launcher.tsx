@@ -12,7 +12,7 @@ export default function Launcher() {
         
         onClicked={
             ()=> {
-                execAsync("omarchy-launch-walker")
+                execAsync("ags request launcherstate apps -i my-shell")
             }
         }
         class={"button launcher-button"}>
