@@ -2,62 +2,88 @@
 
 .quick-settings-panel {
     min-width: 360px;
+    margin: 8px 24px 24px 8px;
+    font-size: 15px;
     .quick-actions {
-        background-color: v.$container-bg;
-        border-top:1px solid v.$border-lighter;
-        padding: 8px;
+        background-color: v.$background;
+        
+        padding: 16px;
+        padding-top: 10px;
+        box-shadow: inset 0px 4px 4px rgba(black,.2), inset -8px -8px 8px rgba(black,.2);
     }
     .quick-action-button {
         min-height:24px;
         min-width: 24px;
         border-radius: 4px;
+        
         &:hover {
-            background-color: v.$container-bg-hover;
+            background-color: v.$container-bg;
+        }
+        image {
+            -gtk-icon-shadow: 1px 1px 2px rgba(black,.4);
         }
     }
     .row-container{
         padding: 20px;
+        border-bottom: 1px solid rgba(white,.05)
     }
     .settings-button {
-        border-radius: 4px;
-        background-color: v.$container-bg;
-        border: 1px solid v.$border-lighter;
+        border-radius: 8px;
+        background-color: v.$window-base;
+        color: v.$foreground;
+        box-shadow: 4px 4px 8px 0 rgba(0,0,0,.3), inset -4px -4px 4px 0 rgba(0,0,0,0.3), inset 4px 4px 4px 0 hsla(0,0%,100%,0.1);
         min-height: 48px;
+        image {
+            -gtk-icon-shadow: 2px 2px 2px rgba(black,.35)
+        }
         &:hover {
             background-color: v.$container-bg-hover;
         }
         &.active {
-            background-color: v.$primary-yellow;
-            color: v.$window-base;
+            background-color: #de935f;
+            color: v.$background;
             &.bluetooth {
+   
                 background-color: v.$bluetooth-blue;
             }
         }
     }
     .settings-label {
-        font-size: 12px;
+        font-size: 13px;
     }
     flowboxchild {
-        padding: 0;
+        padding: 0 0px;
         background:none;
         &:hover {
             background:none;
         }
     }
     scale {
-
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-top:0;
+        padding-bottom: 0;
         trough {
-            background-color: v.$container-bg;
-            min-height:20px
+            background-color: v.$trough-background;
+            box-shadow: inset 1px 1px 1px rgba(black,.6), 1px 1px 1px rgba(white,.2) ;
+            min-height:6px;
         }
         highlight {
-            background-color: v.$primary-yellow;
+            background-color: v.$accent-color;
+            
+         
         }
         slider {
-            background-color: v.$text;
-            box-shadow:none;
-
+            background-color: v.$foreground;
+            transform: scale(.9);
+            box-shadow: 4px 4px 8px 0 rgba(0,0,0,.3), inset -4px -4px 4px 0 rgba(0,0,0,0.4), inset 4px 4px 4px 0 hsla(0,0%,100%,0.7);
+            &:hover,&:focus,&:active {
+                transform: scale(1);
+            }
 
         }
+    }
+    .speaker-label {
+        font-size:13px;
     }
 }

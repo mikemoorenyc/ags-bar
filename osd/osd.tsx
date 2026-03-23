@@ -75,11 +75,11 @@ export default function OSD() {
     }}
     
     
-    homogeneous={false}  spacing={12} class={"osd-container popover-styles-base"} halign={Gtk.Align.CENTER} >
+    homogeneous={false}  spacing={12} class={"osd-container popover-styling"} halign={Gtk.Align.CENTER} >
          
                 <image valign={Gtk.Align.CENTER} vexpand={false}  iconName={volIcon} pixelSize={20} />
              
-                <box  valign={Gtk.Align.CENTER} vexpand={false} class={"volume-slider-trough"}>
+                <box  valign={Gtk.Align.CENTER} vexpand={false} class={"volume-slider-trough"} overflow={Gtk.Overflow.HIDDEN}>
                     <box class={"volume-slider-highlight"} css={highlightWidth} />
                 </box>
                 <label  valign={Gtk.Align.CENTER} vexpand={false} xalign={1} class={"volume-number"} label={levelString}></label>

@@ -2,6 +2,7 @@ import { Node, onCleanup } from "ags"
 import { Astal, Gdk, Gtk } from "ags/gtk4"
 import app from "ags/gtk4/app"
 import Graphene from "gi://Graphene?version=1.0"
+import CalendarWidget from "./CalendarWidget"
 
 
  function Calendar({children}:{children:any}) {
@@ -25,8 +26,8 @@ import Graphene from "gi://Graphene?version=1.0"
       application={app}
       anchor={BOTTOM|RIGHT}
       monitor={0}
-      marginBottom={8}
-      marginRight={8}
+      marginBottom={-16}
+      marginRight={-16}
       keymode={Astal.Keymode.EXCLUSIVE}
       
     >
@@ -58,6 +59,6 @@ import Graphene from "gi://Graphene?version=1.0"
 }
 export default function () {
     return <Calendar >
-<Gtk.Calendar cssName={"calendar"} class={"popover-styles-base"}/>
+<CalendarWidget></CalendarWidget>
         </Calendar>
 }

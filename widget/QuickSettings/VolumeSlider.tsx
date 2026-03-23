@@ -12,10 +12,14 @@ export default function VolumeSlider({closeWindow}:{closeWindow:()=>void}) {
     
     const df = AstalWp.get_default()?.audio!.defaultSpeaker!;
         const dfVolume = createBinding(df, "volume");
+        const name = createBinding(df,"device","description")
+
+        const n = createComputed(()=>name()||"")
     
 
 
-    return<box valign={Gtk.Align.CENTER}>
+    return<box orientation={Gtk.Orientation.VERTICAL} spacing={0}>
+        <box valign={Gtk.Align.CENTER} >
         <button onClicked={()=> {
             execAsync("pamixer -t")
         }}>
@@ -33,5 +37,8 @@ export default function VolumeSlider({closeWindow}:{closeWindow:()=>void}) {
         }}>
             <image iconName={"banana-device-eq-symbolic"} pixelSize={20} />
         </button>
+    </box>
+    <label class={"speaker-label"} label={n} />
+
     </box>
 }

@@ -6,17 +6,17 @@ export default function Launcher() {
     return <box 
     
 
-    class={"container-spacer launcher-container"}>
+    class={"launcher-container"}>
         <button 
-        tooltipText={"Launch Menu"}
+        tooltipText={"Apps"}
         
         onClicked={
             ()=> {
                 execAsync("ags request launcherstate apps -i my-shell")
             }
         }
-        class={"button launcher-button"}>
-            <image iconName={"banana-launcher-symbolic"} pixelSize={20} />
+        class={"container-spacer button launcher-button "}>
+           <image iconName={"banana-launcher-symbolic"} pixelSize={20} />
         </button>
 
     </box>

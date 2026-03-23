@@ -14,7 +14,9 @@ export default function UpdateAvailable() {
     const readFile = async () => {
         try {
             const state = await readFileAsync(checkPath);
+               
             if(parseInt(state)===0) {
+                
                 updateIsVisible(false)
             } else {
                 updateIsVisible(true)
@@ -39,17 +41,12 @@ export default function UpdateAvailable() {
     }
     
     >
-        <button class={"container-spacer button active"} onClicked={()=>{
-            execAsync([
-  "foot",
-  "-e",
-  "bash",
-  "-c",
-  "sudo pacman -Syu; ~/.config/scripts/check-arch-updates.sh"
-])
-            
+        <button hasTooltip tooltipText={"Arch updates available"}  class={"container-spacer button big-raised update-available"} onClicked={async ()=>{
+           await execAsync(`/home/admin/.config/ags/scripts/arch-updaterunner.sh`)
+           await execAsync('/home/admin/.config/ags/scripts/arch-check-updates.sh')
+    
             }}>
-            <image iconName={"banana-sync-symbolic"} pixelSize={18}/>
+            <image iconName={"banana-sync-symbolic"} pixelSize={20} />
         </button>
     </box>
 }

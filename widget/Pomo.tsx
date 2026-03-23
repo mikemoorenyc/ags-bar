@@ -58,6 +58,10 @@ export default function () {
     const controlsVisible = createComputed(()=> state() !== "stopped")
     const containerClasses = createComputed(()=> {
         const classes = ["container","pomo"];
+        if(state() !=="stopped") {
+            classes.push("button");
+            classes.push("active");
+        }
         return [...classes,state()]
     })
     const toolTipText = createComputed(()=> {
@@ -71,7 +75,10 @@ export default function () {
     })
 
     const buttonClasses = createComputed(()=> {
-        const classes = ["banana","button"];
+        let classes = ["banana","button"];
+        if(state() !== "stopped") {
+            classes=["banana"];
+        }
         
         const time = parseInt(count().toString());
         const stateString = state().toString(); 
@@ -83,7 +90,7 @@ export default function () {
         return [...classes,...["break"]] 
     })
     const bananaLabel = createComputed(()=> {
-        return (count() <= 5   && state() !== "stopped" ) ? "":""
+        return (count() <= 5   && state() !== "stopped" ) ? "banana-coffee-symbolic":"banana-tomato-symbolic"
         
        
     })
@@ -101,7 +108,7 @@ export default function () {
             
             hasTooltip={true}
             cssClasses={buttonClasses} 
-            label={bananaLabel} onClicked={()=>{
+            onClicked={()=>{
         
                 if(state().toString() !== "stopped") {
                     console.log("running sowwy")
@@ -109,7 +116,8 @@ export default function () {
                 }
                 startTimer(stateString())
             }}
-        />
+        
+        > <image iconName={bananaLabel} pixelSize={22}/></button>
         <box visible={controlsVisible}>
             <button class={"control"} onClicked={()=> {
                 if(state()== "running") {
@@ -118,9 +126,9 @@ export default function () {
                 } else {
                     startTimer(state()); 
                 }
-            }}><image iconName={pauseButtons} pixelSize={14} /></button>
+            }}><image iconName={pauseButtons} pixelSize={15} /></button>
             <button class={"control"}  tooltipText={"Stop Pomodoro"} onClicked={()=>{stopTimer()}}>
-                <image iconName={"banana-playback-stop-symbolic"} pixelSize={14} />
+                <image iconName={"banana-playback-stop-symbolic"} pixelSize={15} />
             </button>
         </box>
         

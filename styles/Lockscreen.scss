@@ -1,0 +1,81 @@
+@use "./variables.scss" as v; 
+.lockscreen {
+    background-color: v.$window-base;
+ 
+    &-entry {
+        all:unset;
+        border-radius: v.$border-radius-big;
+        border: 1px solid v.$border-lighter;
+        padding: 0 10px;
+        min-height: 28px;
+        min-width: 242px;
+        background-color: v.$container-bg-hover;
+        &.error {
+            &:focus-within {
+            outline-color: v.$error-color-dm;
+            }
+            
+        }
+        &:focus-within {
+            outline: 2px solid v.$primary-yellow;
+        }
+        text {
+            font-size: 16px;
+            color:v.$text
+        }
+        image.right {
+            color:rgba(0,0,0,0);
+            
+        }
+        &.checking {
+            image.right {
+                color:v.$text;
+                animation:spin 2s linear infinite;
+            }   
+        }
+        
+        
+    }
+    .entry-container {
+        .error-text {
+            color:rgba(0,0,0,0);
+        }
+        .error-text.error {
+            color: v.$error-color-dm;
+        }
+    }
+    .time-box {
+        padding-bottom: 64px;
+        .time {
+            font-size: 124px;
+            
+        }
+        .date {
+            font-size: 32px;
+            font-weight:600;
+            letter-spacing: -.07em;
+        }
+    }
+    .system-buttons {
+        padding: 0 64px 100px 64px;
+        .system-button {
+            &:hover {
+                color: v.$primary-yellow
+            }
+            &:nth-child(1) {
+                margin: 0 84px;
+            }
+            .system-label {
+                font-size:18px;
+                padding-top: 10px;
+            }
+        }
+    }
+}
+
+@keyframes spin { 
+    100% { 
+      
+        transform:rotate(360deg); 
+    } 
+}

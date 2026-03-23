@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-echo "👀 Watching for changes..."
+echo "Watching for changes"
 
 start_ags() {
-  echo "🚀 Starting AGS..."
+  echo "Starting"
   ags run app.ts &
 
   AGS_PID=$!
@@ -11,7 +11,7 @@ start_ags() {
 
 stop_ags() {
   if [[ -n "$AGS_PID" ]] && kill -0 "$AGS_PID" 2>/dev/null; then
-    echo "🛑 Stopping AGS..."
+    echo "Stopping"
     ags -i my-shell quit
     wait "$AGS_PID" 2>/dev/null
   fi

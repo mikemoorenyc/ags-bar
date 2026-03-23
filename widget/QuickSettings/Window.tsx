@@ -4,6 +4,7 @@ import app from "ags/gtk4/app"
 import Graphene from "gi://Graphene?version=1.0"
 import QuickSettingsTsx from "."
 
+
 export default function QuickSettings() {
     let win: Astal.Window;
     let child: Gtk.Widget
@@ -25,8 +26,8 @@ export default function QuickSettings() {
         application={app}
         anchor={BOTTOM|RIGHT}
         monitor={0}
-        marginBottom={8}
-        marginRight={8}
+        marginBottom={-8}
+        marginRight={-8}
         keymode={Astal.Keymode.EXCLUSIVE}
         
 

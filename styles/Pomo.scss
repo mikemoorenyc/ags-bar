@@ -3,13 +3,17 @@
 
 .pomo {
     .banana {
-        color: v.$primary-yellow;
+        
         animation: wiggle 1s steps(2) infinite;
         &.start {
-            color: #4CE60A;
+            color:#b5bd68;
+        }
+        &.middle {
+            color:#a54242;
+         
         }
         &.end {
-            color: #5b4000;
+            color:    #c0a36e;
         }
         &.break {
             color: v.$text;
@@ -17,18 +21,27 @@
         }
         &:not(.stopped),&:not(.stopped):hover {
             background:none; 
+            min-width: 0;
+            padding: 0 8px;
         }
       
     }
-    border-radius:4px;
+    
     &:not(.stopped) {
-        background:v.$yelllow-bg;
+
         padding-right: 6px;
     }
     .control {
         font-size: 16px;
         margin: 0 1px;
         padding: 0 2px;
+        color:v.$foreground;
+        &:hover {
+            color:v.$window-white;
+        }
+        image {
+            -gtk-icon-shadow:  2px 2px 2px rgba(black,.3);
+        }
     }
     &.stopped, &.paused {
         .banana {

@@ -1,21 +1,41 @@
 @use "./variables.scss" as v;
+@use "./modules.scss" as m;
 .workspace-container {
+    border-radius: 6px; 
     .ws {
-    margin-right:2px;
+   // margin-right:2px;
     font-size:14px;
     min-width:24px;
-    
+    &:not(:first-child) {
+        border-left: 1px solid rgba(white,.1);
+    }   
+    &:not(:last-child) {
+            
+            border-right: 1px solid rgba(black,.2);
+        }
+    &:first-child {
+        border-radius: 6px 0 0px 6px;
+    }
+    &:last-child {
+        border-radius: 0 6px 6px 0;
+    }
+    &:hover:not(.focused) {
+        background:rgba(white,.03);
+    }
     font-family: v.$font-sans;
     .workspace-button {
-        padding-left:7px;
+        //padding-left:7px;
+        
 
     }
     &.focused {
-        background: v.$yelllow-bg;
+       // background: v.$yelllow-bg;
+       border-color:rgba(white,0);
+       
         .client-button {
             box-shadow: inset 0 -2px 0 rgba(255,255,255,.15);
             &.focused {
-                box-shadow: inset 0 -2px 0 v.$primary-yellow;
+                box-shadow: inset 0 -2px 0 v.$accent-color;
             }
         }
     }
@@ -30,20 +50,23 @@
     }
     &.not-empty {
         .workspace-button {
-            padding-right: 4px;
+            padding: 0 4px 0 6px;
+            
+        }
+        .spacer-button {
+            min-width: 6px;
         }
     }
     .client-button {
        padding: 0 0px;
-       margin: 0 4px;
-     
+       //margin: 0 4px;
+        
        //box-shadow: inset 0 -2px 0 rgba(255,255,255,.15);
        &.focused {
         //box-shadow: inset 0 -2px 0 v.$primary-yellow;
        }
-       &:first-child {
-        margin-left: 0;
-  
+       &:not(:first-child) {
+        margin-left: 4px;
        }
     }
     .client-label {

@@ -13,7 +13,7 @@ type QuickSettingsProps = JSX.IntrinsicElements["box"] & {
 }
 
 export default function ({windowName}:QuickSettingsProps) {
-
+    
     const window =app.get_window(windowName);
 
     const closeWindow = () => {
@@ -25,25 +25,27 @@ export default function ({windowName}:QuickSettingsProps) {
     
     if(window)return <box />
 
-   
     
-    return <box orientation={Gtk.Orientation.VERTICAL} class={"quick-settings-panel popover-styles-base"}>
+    
+    return <box orientation={Gtk.Orientation.VERTICAL} class={"quick-settings-panel popover-styling"} overflow={Gtk.Overflow.HIDDEN}>
 
       <box class={"row-container"} orientation={Gtk.Orientation.VERTICAL} spacing={20}>
         <Gtk.FlowBox class={"button-row"} 
         maxChildrenPerLine={3}
       activateOnSingleClick={false}
       homogeneous
-      rowSpacing={20}
-      columnSpacing={12}
+      rowSpacing={16}
+      columnSpacing={16}
         
         >
             <BluetoothButton closeWindow={closeWindow} />
             <NetworkButton closeWindow={closeWindow} />
             <Button buttonClick={async ()=> {
-                const t= await execAsync("hyprpicker -a");
-              
+               
                 closeWindow(); 
+               const t= await execAsync("hyprpicker -a");
+              
+               
                 
                 
                 

@@ -1,21 +1,22 @@
 @use "./variables.scss" as v; 
 @use "sass:color";
 tooltip {
-    background:v.$text;
-    color:v.$window-base;
-    font-size: 13px;
-    border-radius:v.$border-radius;
-    border:1px solid v.$border-black;
-    padding:4px 6px;
+    background:v.$foreground;
+    color:v.$text-dark;
+    font-size: 12px;
+    border-radius:4px;
+    padding:4px 8px;
     font-family: v.$font-mono;
+    box-shadow:inset -4px -4px 4px 0 rgba(0,0,0,0.3), inset 4px 4px 4px 0 hsla(0,0%,100%,1)
+
 }
 @mixin container-spacer {
-    margin:4px 2px;
+     margin:6px 3px;
 
 }
 @mixin container-style {
     border-radius: 6px;
-   // background: v.$container-bg;
+    //background: v.$container-bg;
 }
 .container,.container-spacer {
     @include container-spacer();
@@ -32,17 +33,31 @@ tooltip {
          background:v.$container-bg-hover;
     }
 }
-
+@mixin extrude-shadow {
+    box-shadow: 1px 1px 2px 0 rgba(0,0,0,.3), inset -1px -1px 2px 0 rgba(0,0,0,0.2), inset 2px 2px 2px 0 hsla(0,0%,100%,0.05);
+}
+.extrude-shadow {
+    @include extrude-shadow()
+}
+@mixin extrude-pressed {
+    box-shadow:  inset -2px -2px 2px 0 hsla(0,0%,100%,0.05),inset 2px 2px 2px 0 rgba(0,0,0,0.4);
+}
+.extrude-pressed {
+    @include extrude-pressed();
+}
 .button {
     @include container-style();
+    color: v.$foreground;
     padding: 0;
     min-height:32px;
     min-width:32px;
     font-family: 'JetBrainsMono Nerd Font Mono', "Noto Color Emoji";
     font-size:24px;
-    &:hover,&.active {
+    @include extrude-shadow();
+   
+    &:hover{
         background:v.$container-bg-hover;
-        color:v.$text;
+ 
 
     }
     &.sm {
@@ -58,29 +73,54 @@ tooltip {
         }
     }
     &.active {
-        background-color: v.$primary-yellow;
-        color:v.$window-base;
+        background-color: color.adjust(v.$window-base,$lightness:-2%);
+        @include extrude-pressed();
+        
         &:hover {
-            background-color: v.$primary-yellow-hover;
+           // background-color: v.$container-bg;
         }
     }
     &.reverse {
         color: v.$window-base;
         &:hover,&.button.active{
-            color:v.$window-base ;
+          
             background-color: color.adjust(v.$text,$blackness:20%)
         }
     }
+    &.big-raised {
+        box-shadow: 4px 4px 8px 0 rgba(0,0,0,.3), inset -4px -4px 4px 0 rgba(0,0,0,0.2), inset 4px 4px 4px 0 hsla(0,0%,100%,0.4);
+    }
+    image.raised {
+        -gtk-icon-shadow: 1px 1px 1px rgba(black,.1)
+    }
+}
+.big-raised {
+    box-shadow: 4px 4px 8px 0 rgba(0,0,0,.3), inset -4px -4px 4px 0 rgba(0,0,0,0.2), inset 4px 4px 4px 0 hsla(0,0%,100%,0.4);
+}
+@mixin shadows-menu {
+    box-shadow: 0 2px 6px rgba(black,.3);
+}
+.shadows-menu {
+    @include shadows-menu();
+}
+.bar-popover {
+    padding: 0;
+}
+.bar-popover > contents, .popover-styling, menubutton menu.background{
+    border-radius: 10px;
+    background-color: v.$text-dark;
+    padding: 0;
+    font-family: v.$font-sans;
+    font-size:14px;
+    box-shadow: 8px 8px 16px 0 rgba(0,0,0,.3), inset -8px -8px 16px 0 rgba(0,0,0,0.3), inset 10px 10px 10px 0 hsla(0,0%,100%,0.05);
 }
 
-
+/*
 @mixin popover-styles {
-    background:v.$window-base;
-    border: 1px solid v.$border-black;
-    border-radius: v.$border-radius-big;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
+    background:v.$yelllow-bg;
     font-size: 14px;
     padding: 0;
+    @include shadows-menu();
 
 }
 .popover-styles-base {
@@ -104,32 +144,29 @@ popover.popover-styles{
     @include popover-styles();
 }
 .popover-styles popover {
-   
-   /* modelbutton {
-        margin: 0px 4px;
-        padding: 6px;
-        border-radius:4px;
-        &:hover {
-            background: v.$container-bg-hover;
-        }
-        radio {
-            min-width:16px;
-            color:currentColor;
-        }
-    }
-    */
     modelbutton {
-        border-radius:4px;
+   
+    }
+   
+
+    
+    modelbutton {
+        margin-left: 0;
+        margin-right: 0;
+        border-radius: 0;
         label {
             font-family: v.$font-sans;
         }
         &:hover {
             background: v.$container-bg-hover;
+            label {
+                background-color: v.$container-bg-hover;
+            }
         }
     }
     separator {
-        background:v.$container-bg;
-        margin: 8px 0;
+        background:v.$border-black;
+        margin:  0;
         padding: 1px 0 0 0 ;
     }
 }
@@ -138,3 +175,4 @@ popover {
         color:rgba(255,255,255,.5)
     }
 }
+*/

@@ -8,6 +8,7 @@ import Menu from "./Menu"
 import { With } from "gnim"
 import { updateCurrentActive,currentActive } from "./Menu"
 import AppWindow from "./AppWindow"
+import WallPaper from "./Wallpaper"
 
 const [launcherState,updateLauncherState] = createState<null|string>(null);
 const name = "LAUNCHER_WINDOW"
@@ -33,6 +34,7 @@ export default function () {
     let box: Gtk.Box
     let child: Gtk.Widget
     let visibleWatcher:number; 
+    let closer:number;
     const testLabel = createComputed(()=> {
         
        if(launcherState()!== null) {
@@ -58,6 +60,16 @@ export default function () {
             launcherSignal(arg)
 
             response(arg);
+        })
+        win.connect("notify::visible",()=> {
+            if(win.get_visible()) {
+                ["CALENDAR_WINDOW","QUICKSETTINGS_WINDOW"].forEach(w=> {
+                    const window = app.get_window(w);
+                    if(window) {
+                        window.hide(); 
+                    }
+                })
+            }
         })
         onCleanup(()=> {
             app.disconnect(visibleWatcher);
@@ -120,6 +132,9 @@ export default function () {
             }
             if(state == "empty") {
                 return <box/>
+            }
+            if(state=="wallpaper") {
+                return <WallPaper window={win} backstate={backstate} />
             }
             return <Menu window={win} state={state} backstate={backstate} />
         }

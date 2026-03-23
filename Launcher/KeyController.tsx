@@ -4,14 +4,13 @@ import Gdk from "gi://Gdk?version=4.0";
 type ControllerProps = {
     upFunction: () => boolean,
     downFunction:() => boolean,
-    returnFunction:() => boolean,
     escapeFunction:()=>boolean
 }
-export default function KeyController({downFunction,upFunction,returnFunction,escapeFunction}:ControllerProps) {
+export default function KeyController({downFunction,upFunction,escapeFunction}:ControllerProps) {
 
 
     return <Gtk.EventControllerKey 
-        onKeyReleased={(_,key)=> {
+        onKeyPressed={(_,key)=> {
             if(key == Gdk.KEY_Down) {
                 return downFunction(); 
             }
@@ -21,9 +20,7 @@ export default function KeyController({downFunction,upFunction,returnFunction,es
             if(key == Gdk.KEY_Escape) {
                 return escapeFunction();
             }
-            if(key == Gdk.KEY_Return) {
-                return returnFunction(); 
-            }
+    
             return true ; 
         }}
     

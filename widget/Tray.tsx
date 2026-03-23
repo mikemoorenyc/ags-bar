@@ -9,6 +9,7 @@ import TrayWindow from "./Tray/TrayWindow";
 import { For } from "gnim";
 import Gio from "gi://Gio?version=2.0";
 import Adw from "gi://Adw?version=1";
+import BarPopover from "../util/BarPopover";
 
 const TrayItem = ({item}:{item:AstalTray.TrayItem})=> {
 
@@ -16,6 +17,7 @@ const TrayItem = ({item}:{item:AstalTray.TrayItem})=> {
     const icon : Accessor<Gio.Icon> = createBinding(item,"gicon");
     const menuModel :Accessor<Gio.MenuModel> = createBinding(item,"menuModel");
     let ag_handler:number; 
+    
 
 
    
@@ -96,10 +98,45 @@ export default function Tray() {
         return layout;
     })
 
+    
+    const menuClass = popoverOpen((o)=> {
+        const cssClasses = ["container-spacer","button","tray-menu"]
+        
+        if(o) {
+            cssClasses.push("active")
+        }
+        return cssClasses
+    })
+     return <box valign={Gtk.Align.CENTER}>
+        <BarPopover
+            classes="container-spacer button tray-menu"
+            buttonChildren={<image iconName={iconName} pixelSize={20}/>}
+            direction={Gtk.ArrowType.UP}
+            halign={Gtk.Align.CENTER}
+            offset={[0,6]}
+            updateVisible={(vis)=>{updatePopoverOpen(vis)}}
+        >
+ <box orientation={Gtk.Orientation.VERTICAL} class={'popover-styles tray-top-popover'}>
+                    <For each={layoutArray}>{
+                        (r)=> {
+                          return <box class={"tray-row"} orientation={Gtk.Orientation.HORIZONTAL}>
+                            {r.map(i=><TrayItem item={i} />)}
+                            </box>
+                        }
+                        }</For>
+                 
+                </box>
+
+        </BarPopover>
+     </box>
+     
 
 
-     return <box>
-        <menubutton class={"container-spacer button tray-menu"} direction={Gtk.ArrowType.UP} halign={Gtk.Align.CENTER}>
+ /*
+ <menubutton cssClasses={menuClass} direction={Gtk.ArrowType.UP} halign={Gtk.Align.CENTER}
+       
+        
+        >
             <image iconName={iconName} pixelSize={20}/>
     
             <popover class={"popover-styles"}
@@ -108,6 +145,7 @@ export default function Tray() {
                 topPopover.disconnect(vis_handler);
             }}
             $={self=>{
+              
                 topPopover = self; 
                 vis_handler = topPopover.connect("notify::visible",()=> {
                     if(topPopover.get_visible()) {
@@ -116,6 +154,7 @@ export default function Tray() {
                         updatePopoverOpen(false);
                     }
                 })
+               
                 self.set_offset(0,6);
             }}
             >
@@ -133,8 +172,7 @@ export default function Tray() {
             </popover>
           
         </menubutton>
-     </box>
-     
+        */    
    /* const trayPopUp= app.get_window("TRAY_WINDOW") as Astal.Window;
     if(!trayPopUp) return <label/>;
    

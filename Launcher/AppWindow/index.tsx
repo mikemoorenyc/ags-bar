@@ -53,7 +53,7 @@ const AppItem = ({app,index,mainWindow}:TAppItemProps)=> {
     const isPinned = createComputed(()=>pinnedApps().includes(pinEntry));
     const isActive=createComputed(()=> active() === index())
     const pinVisible = createComputed(()=>active() ===index()||isPinned() )
-    const containerClass = createComputed(()=>isActive()?"app-item-container active":"app-item-container")
+    const containerClass = createComputed(()=>isActive()?"app-item-container active big-raised":"app-item-container")
     let box:Gtk.Box
     let controller:Gtk.EventControllerMotion
     const pinIcon = createComputed(()=> isPinned()?"banana-pin-filled-symbolic":"banana-pin-empty-symbolic");
@@ -105,7 +105,7 @@ const AppItem = ({app,index,mainWindow}:TAppItemProps)=> {
                     } 
                 }}/>
                 <box >
-                    <image iconName={app.iconName} pixelSize={48}/>
+                    <image iconName={app.iconName} pixelSize={48} class={"app-icon"}/>
                     <box  valign={Gtk.Align.CENTER}orientation={Gtk.Orientation.VERTICAL} class="text" hexpand>
                         <label class={"title"} xalign={0} label={app.name} hexpand ellipsize={Pango.EllipsizeMode.END}/>
                         <label class={"description"} xalign={0} visible={app.description !== null} ellipsize={Pango.EllipsizeMode.END} label={app.description} hexpand/>
@@ -187,6 +187,7 @@ const Entry = ({window}:{window:Astal.Window}) => {
 
     return (
     <entry
+    primaryIconName={"banana-search-symbolic"}
         class="entry"
         hexpand
         onActivate={()=>{
@@ -269,16 +270,19 @@ export default function AppWindow ({window,backstate}:{window:Astal.Window,backs
     $={self=>{
         mainBox=self     
     }}
-    
+    class={"app-launcher-container popover-styling"}
+    overflow={Gtk.Overflow.HIDDEN}
     visible={true} vexpand>      
         <Adw.Clamp maximumSize={800}>
             <box overflow={Gtk.Overflow.HIDDEN}orientation={Gtk.Orientation.VERTICAL} class={"launcher-menu app"}>
-                <box class="header" hexpand>
-                    <label label={"Applications"} class={"header-text"} />
+                <box orientation={Gtk.Orientation.VERTICAL} class={"header-styling app-header"}>
+                    <label label={"Applications"} class={"header-text app-header-text"} xalign={0}/>
+                    <box class={"app-entry-container "} >
+                        <Entry  window={window}/>
+                    </box>
                 </box>
-                <box class={"app-entry-container "} >
-                    <Entry  window={window}/>
-                </box>
+                
+                
                 <box class={"menu-container"}>
                     <AppList window={window} />
                 </box>

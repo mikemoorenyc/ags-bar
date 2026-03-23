@@ -34,7 +34,7 @@ export default function AudioIcon({type}:{type?:string}) {
 
 
 
-return <centerbox class={classes} halign={Gtk.Align.CENTER} tooltipText={volString}>
+return <centerbox  class={classes} halign={Gtk.Align.CENTER} tooltipText={volString}>
     <image $type="center" class={"volume-icon"} iconName={volIcon} pixelSize={size} />
 
 </centerbox>

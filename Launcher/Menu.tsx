@@ -30,7 +30,7 @@ type ListItemProps = JSX.IntrinsicElements["button"] & {
 
 const ListItem = ({item,index,window}:ListItemProps) => {
     const classes = createComputed(()=> {
-        return currentActive() === index ? "list-button active":"list-button"
+        return currentActive() === index ? "list-button active big-raised":"list-button"
     })
 
    
@@ -127,7 +127,8 @@ export default function Menu({state,window,backstate}:{state:null|string,window:
 
         })
     }}
-    
+    class={"popover-styling"}
+    overflow={Gtk.Overflow.HIDDEN}
     >   
     
         

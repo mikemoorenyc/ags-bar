@@ -2,13 +2,13 @@ import { execAsync } from "ags/process"
 import { Accessor } from "gnim"
 
 type TProps = {
-    label:Accessor<string>
+    label:Accessor<string>|string
     backstate?:Accessor<string|null>
 }
 export default ({label,backstate}:TProps) => {
 
 
-    return <box class={"header"} spacing={12}>
+    return <box class={"header header-styling"} spacing={12}>
         {(backstate && backstate())&& <button 
         
         onClicked={async () => {

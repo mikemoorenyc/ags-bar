@@ -13,6 +13,8 @@ import Microphone from "./widget/Microphone"
 import { exec } from "ags/process"
 import ScreenRecording from "./widget/ScreenRecording"
 import UpdateAvailable from "./widget/UpdateAvailable"
+import Weather from "./widget/Weather"
+import StartSpacer from "./widget/StartSpacer"
 
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
@@ -44,7 +46,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
   return (
     <window
       visible={isVisible}
-      name="bar"
+      name="BAR_WINDOW"
       namespace={"BAR_WINDOW"}
       class="Bar"
       gdkmonitor={gdkmonitor}
@@ -52,11 +54,17 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
       anchor={BOTTOM | LEFT | RIGHT}
       application={app}
       layer={layer.BOTTOM}
+      $={self => {
+        setTimeout(()=> {
+          self.set_layer(layer.BOTTOM);
+        },3000)
+      }}
  
     >
       <centerbox class={"barCenterBox"} orientation={Gtk.Orientation.HORIZONTAL}>
         <box $type="start">
           <Launcher />
+          <StartSpacer/>
           <Workspaces/>
           
 
@@ -69,9 +77,11 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
         <box $type="end">
             <ScreenRecording />
             <Pomo/>
+            
             <Tray/>
             <Microphone />
               <ControlPanelButton/>
+              <Weather />
             <Clock monitor={gdkmonitor}/>
         </box>
       </centerbox>

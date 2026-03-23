@@ -5,6 +5,7 @@ import { createComputed } from "ags"
 import { execAsync } from "ags/process"
 import { createPoll } from "ags/time"
 import  network from "../../../util/networkService"
+import Gtk from "gi://Gtk?version=4.0"
 
 type returnData = {
     strength:number,
@@ -24,11 +25,11 @@ export default function WifiIcon() {
         if(!network.ssid()) return "No ssid";
         return network.ssid();
     })
-    const boxClass = createComputed(()=>network.vpn()?"wifi-icon protected":"wifi-icon")
+    const boxClass = createComputed(()=>network.vpn()?"taskbar-icon wifi-icon protected":"taskbar-icon wifi-icon")
 
  
-    return <box tooltipText={tooltip} class={boxClass}>
-        <image  iconName={data} pixelSize={16} />
+    return <box  tooltipText={tooltip} class={boxClass}>
+        <image  iconName={data} pixelSize={16} halign={Gtk.Align.CENTER}/>
     </box>
 }
 

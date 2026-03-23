@@ -1,29 +1,42 @@
 // https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
 @use "sass:color";
-$text: #efefef;
+$text: #f4f4f4;
 $disabled-text: rgba(255,255,255,.5);
-$window-base: #171412;
-$bg-color: #{"@theme_bg_color"};
+$window-base: #35393c;
+$foreground: #c5c8c6;
+$background: #1d1f21;
+$window-white: $foreground;
+$text-dark: #282a2e;
 $container-bg: color.adjust($window-base,$lightness:2%);
-$container-bg-hover: color.adjust($window-base,$lightness:6%);
-$border-black: $container-bg;
+$container-bg-hover: color.adjust($window-base,$lightness:4%);
+
+$border-black: color.adjust($window-base,$lightness:5%);
 $border-lighter: color.adjust($container-bg,$lightness:2%);
-$primary-yellow:  #e5a50a;
+$primary-yellow:  #0F62FE;
+$primary-yellow-text: #78a9ff;
 $primary-yellow-hover: color.adjust($primary-yellow,$lightness:5%);
-$yelllow-bg :color.change($primary-yellow, $alpha:.15);
+$yelllow-bg :#393939;
 $hover-bg: rgba(255,255,255,.05);
-$error-color: #da1e28;
+$error-color: #a54242;
 $error-color-hover: color.adjust($error-color,$lightness:5%);
-$caution-color: rgb(255, 166, 0);
+$caution-color: #f0c674;
+$caution-color-hover: color.adjust($caution-color,$lightness:4%);
+$caution-color-text: #fcf4d6;
 $error-color-lighter: color.change($error-color,$alpha:.25);
 $bluetooth-blue: #0083FC;
-$border-radius: 4px;
+$border-radius: 2px;
 $border-radius-big: 6px;
 $border-radius-huge: 12px;
+$error-color-dm: #ff8389;
+
+$trough-background: color.adjust($window-base, $lightness:-10%);
+
+$accent-color: #5f819d;
+$accent-color-hover: color.adjust($accent-color,$lightness:4%);
+$blue-light: #81a2be;
 
 
 
-
-$font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-$font-mono: "Roboto Mono", monospace;
+$font-sans: "IBM Plex Sans",'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+$font-mono: "IBM Plex Mono",'JetBrainsMono Nerd Font Mono',"Roboto Mono", monospace;
 $font-icon: 'JetBrainsMono Nerd Font Mono', "Noto Color Emoji";

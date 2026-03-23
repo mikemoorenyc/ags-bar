@@ -1,11 +1,12 @@
 @use "variables";
 window.Bar {
   background:variables.$window-base;
-  border-top:1px solid variables.$container-bg;
-  color: variables.$text;
+  border-top:1px solid variables.$border-black;
+  color: variables.$window-white;
   font-weight:normal;
   font-family: variables.$font-sans;
   font-size:14px;
+  //box-shadow: inset 0 3px 120px rgba(white,.02);
   
   
 
@@ -14,6 +15,29 @@ window.Bar {
 
     margin: 0;
     padding: 0 4px;
+  }
+  .temp-label {
+    font-size: 14px;
+    line-height: 14px;
+  }
+  .temp-popover {
+    padding: 0 8px;
+  }
+  .update-available {
+    background-color: variables.$caution-color;
+    color:variables.$text-dark;
+    text-shadow: 0 1px 1px white;
+    image {
+      -gtk-icon-shadow:  1px 1px 1px rgba(white,.5);
+    }
+    &:hover {
+      background-color: variables.$caution-color-hover;
+    }
+  }
+  .start-spacer {
+    min-width: 3px;
+    margin: 0 6px;
+    min-height: 24px;
   }
 
   

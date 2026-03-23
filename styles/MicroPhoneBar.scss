@@ -1,14 +1,15 @@
 @use "./variables.scss" as v; 
 .mic-button {
- 
-        
-        &:not(.muted):hover {
-            
-          //  box-shadow: inset 1px 1px 0 v.$primary-yellow, inset -1px -1px v.$primary-yellow, inset -1px 1px 0 v.$primary-yellow, inset 1px -1px v.$primary-yellow;;
-        }
+    background-color: v.$accent-color;
+    &:hover {
+        background-color: v.$accent-color-hover;
+    }
     &.muted {
         background-color: v.$error-color;
-        color:v.$text
+        &:hover {
+            background-color: v.$error-color-hover;
+        }
+      
      
     }
 }

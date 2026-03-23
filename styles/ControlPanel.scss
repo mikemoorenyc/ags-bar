@@ -1,30 +1,34 @@
 @use "./variables.scss" as v; 
 
 .control-panel {
-    color:white;
+  
 }
 .control-panel.taskbar-button {
     font-family: v.$font-mono;
     font-size: 16px;
+    padding: 0 8px;
     .taskbar-icon {
-        color:v.$text;
+       
     }
     .volume-percent {
         font-size:12px;
         margin-left:2px;
     }
     .volume-icon {
-        color:v.$text;
+       
         font-size: 13px;
     
     }
 
     .bluetooth-icon {
         font-size:14px;
-        color:v.$bluetooth-blue;
+        color:v.$blue-light;
     }
     .wifi-icon.protected {
-        color: v.$primary-yellow;
+        color: v.$caution-color;
+    }
+    &.active {
+        //background-color: v.$container-bg-hover;
     }
     
 }

@@ -1,11 +1,26 @@
 @use "./variables.scss" as v; 
 .launcher-button {
-    color: v.$primary-yellow;
+    //color: v.$primary-yellow;
+    background-color: v.$accent-color;
+    box-shadow: 4px 4px 8px 0 rgba(0,0,0,.3), inset -4px -4px 4px 0 rgba(0,0,0,0.2), inset 4px 4px 4px 0 hsla(0,0%,100%,0.4);
+    text-shadow: 0 1px 1px white;
+    color:v.$text-dark;
+    image {
+        -gtk-icon-shadow:  1px 1px 1px rgba(white,.5);
+    }
+    &:hover {
+        background-color: v.$accent-color-hover;
+    }
 }
 
-
+.header-styling {
+    background: v.$window-base;
+    box-shadow: inset 4px 4px 4px rgba(white,.07), inset -4px 0px 4px rgba(black,.4);
+}
 
 .launcher {
+    font-family: v.$font-sans;
+    color:v.$foreground;
     .launcher-menu {
         min-width: 320px;
         &.app {
@@ -14,22 +29,18 @@
         }
     }
     .header {
-        padding: 18px 22px;
-        background: v.$container-bg;
-        border-bottom:1px solid v.$border-lighter;
-        border-top-left-radius: v.$border-radius-huge;
-        border-top-right-radius: v.$border-radius-huge;
-        border-top: 1px solid v.$border-black;
-        box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
+        padding: 16px 16px;
+        
         &-text {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 700;
         }
     }
     .menu-container {
-        border-bottom-left-radius: v.$border-radius-huge;
-        border-bottom-right-radius: v.$border-radius-huge;
-        background-color: v.$window-base;
+        //border-bottom-left-radius: v.$border-radius-huge;
+        //border-bottom-right-radius: v.$border-radius-huge;
+       // background-color: v.$window-base;
+       box-shadow: inset 0 4px 4px rgba(white,.06);
     }
     .menu-list {
         padding: 18px;
@@ -39,32 +50,44 @@
         padding: 16px;
         border-radius: v.$border-radius-big;
         &.active {
-            background-color: v.$primary-yellow;
-            color: v.$window-base;
+            background-color: v.$accent-color;
+            color: v.$text-dark;
         }
         &-text {
             font-size:18px;
         }
     }
     .app-entry-container {
-        background-color: v.$window-base;
+        //background-color: v.$window-base;
+    }
+    .app-header-text {
+        padding: 24px 32px;
+        padding-bottom: 0;
     }
     .app-entry-container {
-        padding: 24px;
+        padding: 24px 32px;
         .entry {
             all: unset;
-            border:1px solid v.$border-lighter;
-            background-color: v.$container-bg-hover;
-            color: v.$text;
-            font-size: 18px;
+            background-color: v.$foreground;
+            color: v.$text-dark;
+            font-size: 20px;
             font-family: v.$font-sans;
             padding: 12px; 
-            border-radius: v.$border-radius-big;
+            border-radius: v.$border-radius-huge;
+            
+            box-shadow: inset 4px 4px 4px rgba(black,.3), 3px 3px 2px rgba(white,.15), 0 0 1px 1px v.$window-base; 
+            image.left {
+                margin-right:8px;
+                
+            }
         }
         
     }
+    .app-launcher-container {
+        border-radius:v.$border-radius-huge;
+    }
     .app-list-container {
-        padding:0 24px 24px 24px;
+        padding:24px 32px 24px 32px;
     }
     .app-item-container {
         padding: 12px;
@@ -73,10 +96,13 @@
             color:v.$disabled-text;
         }
         &.active {
-            background-color: v.$primary-yellow;
-            color:v.$window-base;
+            background-color: v.$accent-color;
+            color:v.$text-dark;
             .description {
-                color:v.$window-base; 
+                color:v.$text-dark; 
+            }
+            .app-icon {
+                -gtk-icon-shadow: 1px 1px 1px rgba(black,.3)
             }
         }
         .text {
@@ -106,4 +132,16 @@
         font-size:.00001px; 
     }
     
+    
+}
+.wallpaper-thumbnail {
+    background: #2A7B9B;
+background: linear-gradient(45deg,rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%);
+    min-width: 50px;
+    min-height: 50px;
+}
+
+.test-image {
+    min-width:500px;
+    background-color: beige;
 }

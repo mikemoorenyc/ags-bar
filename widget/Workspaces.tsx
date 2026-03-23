@@ -57,12 +57,18 @@ const WorkspaceItem = function({item,focused}:{item:any,focused:any}) {
    const showClients = createComputed(()=>clients().length > 0);
    
    const btnClasses = createComputed(()=> {
-    const classes=["button","sm","ws"];
+    const classes=["sm","ws"];
     const isVisible = clients().length > 0?"not-empty":"empty";
     classes.push(isVisible);
     const wsId = item.id.toString();
-    const focusedClass = wsId === focused.toString() ? "focused" : "not-focused";
-    classes.push(focusedClass);
+    if(wsId === focused.toString()) {
+        classes.push("focused");
+        classes.push("extrude-pressed")
+    } else {
+        classes.push("not-focused")
+    }
+    
+    
 
     return classes
    })
@@ -70,13 +76,22 @@ const WorkspaceItem = function({item,focused}:{item:any,focused:any}) {
     
     return <box cssClasses={btnClasses}>
         
-        <box><button class={"workspace-button"} label={item.id.toString()} onClicked={()=>{item.focus()}} />
-        <box visible={showClients} css={"padding-right:6px;"}>
+        <With value={showClients}>{
+        value => {
+            if(value) {
+                return <box><button class={"workspace-button"} label={item.id.toString()} onClicked={()=>{item.focus()}} />
+        <box visible={showClients}>
             <For each={clients}>{
             (client)=><ClientItem client={client} />    
             }</For>
         </box>
+        <button class={"spacer-button"} onClicked={()=>{item.focus()}} ></button>
         </box>
+            } else {
+                return <button label={item.id.toString()} onClicked={()=>{item.focus()}}></button>
+            }
+        }    
+        }</With>
     </box>
        
 
@@ -94,7 +109,7 @@ export default function () {
     const focusId = createComputed(()=>focusedWorkspace().id)
 
 
-    return <box class={"container workspace-container"}>
+    return <box class={"container workspace-container container-style container-spacer extrude-shadow"}>
         <With value={focusId}>{(focusId)=><box>
             <For each={flip}>{(item)=>(
                 <WorkspaceItem focused={focusId} item={item} />
