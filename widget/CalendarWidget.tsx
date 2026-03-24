@@ -188,73 +188,7 @@ export default function CalendarWidget() {
                </For>
             </box>
          </box>
-         <box class={"detail-panel"} visible={false} widthRequest={250}>
-            <Adw.Clamp maximumSize={250}>
-               <scrolledwindow heightRequest={250} propagateNaturalHeight={true} maxContentHeight={250} hexpand >
-                  <box orientation={Gtk.Orientation.VERTICAL} >
-                     <box class={"event-item"} orientation={Gtk.Orientation.VERTICAL}>
-                        <label xalign={0}class="title" wrap={true} label={"Kiki's Delivery Service in 4K"} />
-                        <label xalign={0} class={"time"} label={"Mon, Mar 23 4:30-5:30PM"} />
-                        <box class="location" >
-                           <image iconName={"banana-locationmarker-symbolic"} pixelSize={16} />
-                           <label class="location" hexpand halign={0} label={"117 Dobbin St, Brooklyn, NY 11222 USA 117 Dobbin St, Brooklyn, NY 11222 USA"} wrap={true} />
-                        </box>
-
-                     </box>
-                         <box class={"event-item"}  orientation={Gtk.Orientation.VERTICAL}>
-                              <box>
-                                 <label xalign={0} hexpand={false} class="cal-tag" label={"UNITED STATES HOLIDAYS"}></label>
-                              </box>
-                        <label xalign={0}class="title" wrap={true} label={"Kiki's Delivery Service in 4K"} />
-                        <label xalign={0} class={"time"} label={"Mon, Mar 23 4:30-5:30PM"} />
-                        <box class="location" >
-                           <image valign={Gtk.Align.START} iconName={"banana-locationmarker-symbolic"} pixelSize={16} />
-                           <label class="location-label" xalign={0} hexpand halign={0} label={"117 Dobbin St, Brooklyn, NY 11222 USA 117 Dobbin St, Brooklyn, NY 11222 USA"} wrap={true} />
-                        </box>
-
-                     </box>
-                         <box class={"event-item"} orientation={Gtk.Orientation.VERTICAL}>
-                        <label xalign={0}class="title" wrap={true} label={"Kiki's Delivery Service in 4K"} />
-                        <label xalign={0} class={"time"} label={"Mon, Mar 23 4:30-5:30PM"} />
-                        <box class="location" >
-                           <image iconName={"banana-locationmarker-symbolic"} pixelSize={16} />
-                           <label class="location" hexpand halign={0} label={"117 Dobbin St, Brooklyn, NY 11222 USA 117 Dobbin St, Brooklyn, NY 11222 USA"} wrap={true} />
-                        </box>
-
-                     </box>
-                         <box class={"event-item"} orientation={Gtk.Orientation.VERTICAL}>
-                        <label xalign={0}class="title" wrap={true} label={"Kiki's Delivery Service in 4K"} />
-                        <label xalign={0} class={"time"} label={"Mon, Mar 23 4:30-5:30PM"} />
-                        <box class="location" >
-                           <image iconName={"banana-locationmarker-symbolic"} pixelSize={16} />
-                           <label class="location" hexpand halign={0} label={"117 Dobbin St, Brooklyn, NY 11222 USA 117 Dobbin St, Brooklyn, NY 11222 USA"} wrap={true} />
-                        </box>
-
-                     </box>
-                         <box class={"event-item"} orientation={Gtk.Orientation.VERTICAL}>
-                           <label xalign={0} class="cal-tag" label={"United States Holidays"}></label>
-                        <label xalign={0}class="title" wrap={true} label={"Kiki's Delivery Service in 4K"} />
-                        <label xalign={0} class={"time"} label={"Mon, Mar 23 4:30-5:30PM"} />
-                        <box class="location" >
-                           <image iconName={"banana-locationmarker-symbolic"} pixelSize={16} />
-                           <label class="location" hexpand halign={0} label={"117 Dobbin St, Brooklyn, NY 11222 USA 117 Dobbin St, Brooklyn, NY 11222 USA"} wrap={true} />
-                        </box>
-
-                     </box>
-                         <box class={"event-item"} orientation={Gtk.Orientation.VERTICAL}>
-                        <label xalign={0}class="title" wrap={true} label={"Kiki's Delivery Service in 4K"} />
-                        <label xalign={0} class={"time"} label={"Mon, Mar 23 4:30-5:30PM"} />
-                        <box class="location" >
-                           <image iconName={"banana-locationmarker-symbolic"} pixelSize={16} />
-                           <label class="location" hexpand halign={0} label={"117 Dobbin St, Brooklyn, NY 11222 USA 117 Dobbin St, Brooklyn, NY 11222 USA"} wrap={true} />
-                        </box>
-
-                     </box>
-                  </box>
-               </scrolledwindow>
-
-            </Adw.Clamp>
-         </box>
+       
       </box>
    );
 }
