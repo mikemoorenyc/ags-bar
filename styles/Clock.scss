@@ -133,7 +133,8 @@ window#CALENDAR_WINDOW {
     }
     .days {
         padding: 4px 4px ;
-        box-shadow: inset 0 4px 4px rgba(white,.06);
+      
+        box-shadow: inset 0 4px 4px rgba(white,.06), inset -6px 0 6px rgba(black,.25);
     }
     .week-row {
         padding: 4px 0;
@@ -145,6 +146,41 @@ window#CALENDAR_WINDOW {
         }
         &:not(:last-child) {
             border-bottom:1px solid rgba(black,.1);
+        }
+    }
+    .detail-panel {
+        min-width:260px;
+        box-shadow: inset 6px 0 6px rgba(white,.05)
+
+    }
+    .event-item {
+        padding: 16px 10px 0 10px;
+        color:v.$foreground;
+        &:last-child {
+            padding-bottom: 16px;
+        }
+        .cal-tag {
+            background: v.$accent-color;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight:600;
+            padding: 2px 4px;
+            margin-bottom: 2px; 
+            
+        }
+        .title {
+            font-weight:700;
+            font-size:16px;
+        }
+        .time {
+            font-size:14px;
+        }
+        .location {
+            margin-top: 4px;
+            font-size: 12px; 
+            &-label {
+                margin-left: 4px; 
+            }
         }
     }
 }

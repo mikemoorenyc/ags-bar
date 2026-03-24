@@ -5,6 +5,7 @@ import { createRoot, createState } from "gnim"
 import Time from "./Time"
 import System from "./System"
 import { execAsync } from "ags/process"
+import LockscreenWeather from "./LockscreenWeather"
 export default function createLockScreen(arg?:string) {
     const {TOP,LEFT,BOTTOM,RIGHT} = Astal.WindowAnchor
     let win:Astal.Window
@@ -55,19 +56,20 @@ export default function createLockScreen(arg?:string) {
         layer={Astal.Layer.OVERLAY}
         keymode={Astal.Keymode.ON_DEMAND}
         >
-            <overlay>
-                <box vexpand hexpand>
-                    
+            <centerbox vexpand orientation={Gtk.Orientation.VERTICAL}>
+                <box $type="start" vexpand>
+                    <LockscreenWeather />
                 </box>
-                <box $type="overlay">
-
+        
+                <box $type="center" orientation={Gtk.Orientation.VERTICAL}>
+                    <Time/>
                     <Entry />
                 </box>
-
-
-
-            </overlay>
-
+                <box $type="end" vexpand >
+                <System />
+                </box>
+            </centerbox>
+         
 
 
         </window>

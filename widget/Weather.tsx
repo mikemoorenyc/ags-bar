@@ -4,7 +4,7 @@ import fetch from "gnim/fetch"
 import weathersymbol from "../util/weathersymbol"
 import { execAsync } from "ags/process"
 
-type TWeatherData = {
+export type TWeatherData = {
     current: {
         temperature_2m:number,
         apparent_temperature:number,

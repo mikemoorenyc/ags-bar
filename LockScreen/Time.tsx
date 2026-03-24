@@ -9,7 +9,7 @@ export default function Time() {
         `date +"%A %B %d"`)
 
 
-    return <box valign={Gtk.Align.END} orientation={Gtk.Orientation.VERTICAL} hexpand class={"time-box"} $type="start" vexpand={true}
+    return <box  orientation={Gtk.Orientation.VERTICAL} hexpand class={"time-box"} $type="start" 
     
     >
         <label class={"time"} label={time} />

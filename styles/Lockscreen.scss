@@ -1,15 +1,18 @@
 @use "./variables.scss" as v; 
 .lockscreen {
     background-color: v.$window-base;
- 
+    color:v.$foreground;
     &-entry {
-        all:unset;
-        border-radius: v.$border-radius-big;
-        border: 1px solid v.$border-lighter;
-        padding: 0 10px;
-        min-height: 28px;
-        min-width: 242px;
-        background-color: v.$container-bg-hover;
+        all: unset;
+            background-color: v.$foreground;
+            color: v.$text-dark;
+            font-size: 20px;
+            font-family: v.$font-sans;
+            padding: 12px; 
+            border-radius: v.$border-radius-huge;
+            outline-width: 4px;
+            box-shadow: inset 4px 4px 4px rgba(black,.3), 3px 3px 2px rgba(white,.15), 0 0 1px 1px v.$window-base; 
+            min-width:320px;
         &.error {
             &:focus-within {
             outline-color: v.$error-color-dm;
@@ -17,19 +20,16 @@
             
         }
         &:focus-within {
-            outline: 2px solid v.$primary-yellow;
+            outline: 4px solid v.$accent-color;
         }
-        text {
-            font-size: 16px;
-            color:v.$text
-        }
+     
         image.right {
             color:rgba(0,0,0,0);
             
         }
         &.checking {
             image.right {
-                color:v.$text;
+                color:v.$text-dark;
                 animation:spin 2s linear infinite;
             }   
         }
@@ -47,20 +47,34 @@
     .time-box {
         padding-bottom: 64px;
         .time {
-            font-size: 124px;
+            font-size: 125px;
             
         }
         .date {
             font-size: 32px;
             font-weight:600;
-            letter-spacing: -.07em;
+     
         }
     }
     .system-buttons {
         padding: 0 64px 100px 64px;
         .system-button {
+            background:v.$window-base;
+            border-radius: v.$border-radius-huge;
+            padding: 10px 0;
+            min-width:120px;
+            color:v.$text-dark;
+            box-shadow: 4px 4px 8px 0 rgba(0,0,0,.3), inset -4px -4px 4px 0 rgba(0,0,0,0.3), inset 4px 4px 4px 0 hsla(0,0%,100%,0.2);
+            text-shadow: -2px -2px 2px rgba(white,.3);
+            font-weight: 600;
+            image {
+                -gtk-icon-shadow:-2px -2px 2px rgba(white,.3)
+            }
+            &:nth-child(1) {
+                
+            }
             &:hover {
-                color: v.$primary-yellow
+                background:v.$container-bg-hover;
             }
             &:nth-child(1) {
                 margin: 0 84px;
@@ -70,6 +84,38 @@
                 padding-top: 10px;
             }
         }
+        .system-button-container {
+            &:nth-child(1) {
+                .system-button {
+                    background-color: v.$accent-color;
+                }
+            }
+            &:nth-child(2) {
+                .system-button {
+                    background-color: #de935f;
+                }
+            }
+            &:nth-child(3) {
+                .system-button {
+                    background-color: #85678f;
+                }
+            }
+        }
+    }
+    .lockscreen-weather {
+        padding: 72px 48px 0 48px;
+        text-shadow: 3px 3px 3px rgba(black,.3);
+        .temp-label {
+            font-size: 60px;
+            font-weight:600;
+        }
+        .time-label {
+            font-size: 32px;
+        }
+        image {
+            -gtk-icon-shadow:  3px 3px 3px rgba(black,.3);
+        }
+        
     }
 }
 

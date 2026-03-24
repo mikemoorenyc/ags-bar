@@ -1,9 +1,10 @@
 
 import { Gtk } from "ags/gtk4";
-import { createBinding, createComputed, createState, For } from "ags";
+import { createBinding, createComputed, createEffect, createState, For } from "ags";
 
 import Calendar, { CalendarDay } from "../util/Calendar";
 import { execAsync } from "ags/process";
+import Adw from "gi://Adw?version=1";
 const calendar = Calendar.get_default();
 
 const WEEK_DAYS = ["M", "T", "W", "T", "F", "S", "S"];
@@ -47,7 +48,7 @@ function WeekDayHeader({ day, index }: { day: string; index: number }) {
 }
 
 function Header() {
-   const [testData,updateTestData] = createState("thing");
+
    const date = createBinding(calendar, "date");
    const monthLabel = createComputed(()=> {
     const month = date().toLocaleString("default", { month: "short" });
@@ -75,7 +76,7 @@ function Header() {
          valign={Gtk.Align.CENTER}
             class={"monthyear"}
             
-            label={testData}
+            label={monthLabel}
          />
          <box hexpand />
          <button class={"reset-button "}onClicked={() => calendar.reset()}
@@ -107,45 +108,152 @@ function Header() {
       </box>
    );
 }
-
+const createString = (date:Date) => {
+   return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
+}
+type TDate = {
+      calendar :{
+         calId: string,
+         color:string,
+         primary:boolean,
+         title:string
+      },
+      title: string,
+      start:{
+         date?:string,
+         dateTime?:string,
+      },
+      end:{
+         date?:string,
+         dateTime?:string,
+      }
+      location?:string
+      id:string
+   }
 export default function CalendarWidget() {
    const weeks = createBinding(calendar, "calendar");
-   const firstday=createComputed(()=> {
-      weeks
+   const [dates,updateDates] = createState(["",""])
+   const [events,updateEvents] = createState<TDate[]>([])
+
+   const grabDates = async (start:string,end:string) => {
+      const dates = await execAsync(`/home/admin/.config/ags/scripts/check-cal.sh --start ${start} --end ${end}`);
+      console.log(dates);
+   }
+   
+   createEffect(async()=> {
+      const firstDay =createString(weeks()[0][0].date)
+      const lastWeek = weeks()[weeks().length-1];
+      const lastDay = createString(lastWeek[lastWeek.length-1].date);
+      if(firstDay !== dates()[0]) {
+         updateDates([firstDay,lastDay])
+      //   grabDates(firstDay,lastDay);
+         console.log(firstDay,lastDay);
+
+      }
    })
 
    return (
-      <box
-        class={"calendar-container popover-styling"}
-        overflow={Gtk.Overflow.HIDDEN}
-         $={(self) => {
-            self.connect("map", () => calendar.reset());
-         }}
-         orientation={Gtk.Orientation.VERTICAL}
-         spacing={0}
-      >
-         <box class={"top-section"} orientation={Gtk.Orientation.VERTICAL}>
-            <Header />
-         <box class={"weekdays"} spacing={0}>
-            {WEEK_DAYS.map((day, index) => (
-               <WeekDayHeader day={day} index={index} />
-            ))}
-         </box>
-         </box>
+      <box overflow={Gtk.Overflow.HIDDEN} class={"outer-container calendar-container popover-styling"}>
          <box
-            spacing={0}
-            class={"days"}
+         
+         class={" "}
+         overflow={Gtk.Overflow.HIDDEN}
+            $={(self) => {
+               self.connect("map", () => calendar.reset());
+            }}
             orientation={Gtk.Orientation.VERTICAL}
+            spacing={0}
          >
-            <For each={weeks}>
-               {(week) => (
-                  <box spacing={0} class={"week-row"}>
-                     {week.map((day) => (
-                        <CalendarDayButton day={day} />
-                     ))}
+            <box class={"top-section"} orientation={Gtk.Orientation.VERTICAL}>
+               <Header />
+            <box class={"weekdays"} spacing={0}>
+               {WEEK_DAYS.map((day, index) => (
+                  <WeekDayHeader day={day} index={index} />
+               ))}
+            </box>
+            </box>
+            <box
+               spacing={0}
+               class={"days"}
+               orientation={Gtk.Orientation.VERTICAL}
+            >
+               <For each={weeks}>
+                  {(week) => (
+                     <box spacing={0} class={"week-row"}>
+                        {week.map((day) => (
+                           <CalendarDayButton day={day} />
+                        ))}
+                     </box>
+                  )}
+               </For>
+            </box>
+         </box>
+         <box class={"detail-panel"} visible={false} widthRequest={250}>
+            <Adw.Clamp maximumSize={250}>
+               <scrolledwindow heightRequest={250} propagateNaturalHeight={true} maxContentHeight={250} hexpand >
+                  <box orientation={Gtk.Orientation.VERTICAL} >
+                     <box class={"event-item"} orientation={Gtk.Orientation.VERTICAL}>
+                        <label xalign={0}class="title" wrap={true} label={"Kiki's Delivery Service in 4K"} />
+                        <label xalign={0} class={"time"} label={"Mon, Mar 23 4:30-5:30PM"} />
+                        <box class="location" >
+                           <image iconName={"banana-locationmarker-symbolic"} pixelSize={16} />
+                           <label class="location" hexpand halign={0} label={"117 Dobbin St, Brooklyn, NY 11222 USA 117 Dobbin St, Brooklyn, NY 11222 USA"} wrap={true} />
+                        </box>
+
+                     </box>
+                         <box class={"event-item"}  orientation={Gtk.Orientation.VERTICAL}>
+                              <box>
+                                 <label xalign={0} hexpand={false} class="cal-tag" label={"UNITED STATES HOLIDAYS"}></label>
+                              </box>
+                        <label xalign={0}class="title" wrap={true} label={"Kiki's Delivery Service in 4K"} />
+                        <label xalign={0} class={"time"} label={"Mon, Mar 23 4:30-5:30PM"} />
+                        <box class="location" >
+                           <image valign={Gtk.Align.START} iconName={"banana-locationmarker-symbolic"} pixelSize={16} />
+                           <label class="location-label" xalign={0} hexpand halign={0} label={"117 Dobbin St, Brooklyn, NY 11222 USA 117 Dobbin St, Brooklyn, NY 11222 USA"} wrap={true} />
+                        </box>
+
+                     </box>
+                         <box class={"event-item"} orientation={Gtk.Orientation.VERTICAL}>
+                        <label xalign={0}class="title" wrap={true} label={"Kiki's Delivery Service in 4K"} />
+                        <label xalign={0} class={"time"} label={"Mon, Mar 23 4:30-5:30PM"} />
+                        <box class="location" >
+                           <image iconName={"banana-locationmarker-symbolic"} pixelSize={16} />
+                           <label class="location" hexpand halign={0} label={"117 Dobbin St, Brooklyn, NY 11222 USA 117 Dobbin St, Brooklyn, NY 11222 USA"} wrap={true} />
+                        </box>
+
+                     </box>
+                         <box class={"event-item"} orientation={Gtk.Orientation.VERTICAL}>
+                        <label xalign={0}class="title" wrap={true} label={"Kiki's Delivery Service in 4K"} />
+                        <label xalign={0} class={"time"} label={"Mon, Mar 23 4:30-5:30PM"} />
+                        <box class="location" >
+                           <image iconName={"banana-locationmarker-symbolic"} pixelSize={16} />
+                           <label class="location" hexpand halign={0} label={"117 Dobbin St, Brooklyn, NY 11222 USA 117 Dobbin St, Brooklyn, NY 11222 USA"} wrap={true} />
+                        </box>
+
+                     </box>
+                         <box class={"event-item"} orientation={Gtk.Orientation.VERTICAL}>
+                           <label xalign={0} class="cal-tag" label={"United States Holidays"}></label>
+                        <label xalign={0}class="title" wrap={true} label={"Kiki's Delivery Service in 4K"} />
+                        <label xalign={0} class={"time"} label={"Mon, Mar 23 4:30-5:30PM"} />
+                        <box class="location" >
+                           <image iconName={"banana-locationmarker-symbolic"} pixelSize={16} />
+                           <label class="location" hexpand halign={0} label={"117 Dobbin St, Brooklyn, NY 11222 USA 117 Dobbin St, Brooklyn, NY 11222 USA"} wrap={true} />
+                        </box>
+
+                     </box>
+                         <box class={"event-item"} orientation={Gtk.Orientation.VERTICAL}>
+                        <label xalign={0}class="title" wrap={true} label={"Kiki's Delivery Service in 4K"} />
+                        <label xalign={0} class={"time"} label={"Mon, Mar 23 4:30-5:30PM"} />
+                        <box class="location" >
+                           <image iconName={"banana-locationmarker-symbolic"} pixelSize={16} />
+                           <label class="location" hexpand halign={0} label={"117 Dobbin St, Brooklyn, NY 11222 USA 117 Dobbin St, Brooklyn, NY 11222 USA"} wrap={true} />
+                        </box>
+
+                     </box>
                   </box>
-               )}
-            </For>
+               </scrolledwindow>
+
+            </Adw.Clamp>
          </box>
       </box>
    );

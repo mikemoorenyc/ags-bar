@@ -15,6 +15,7 @@ import ScreenRecording from "./widget/ScreenRecording"
 import UpdateAvailable from "./widget/UpdateAvailable"
 import Weather from "./widget/Weather"
 import StartSpacer from "./widget/StartSpacer"
+import LockscreenWeather from "./LockScreen/LockscreenWeather"
 
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
@@ -67,7 +68,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
           <StartSpacer/>
           <Workspaces/>
           
-
+      
         </box>
         <box $type="center">
           <UpdateAvailable />

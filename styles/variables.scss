@@ -9,7 +9,7 @@ $window-white: $foreground;
 $text-dark: #282a2e;
 $container-bg: color.adjust($window-base,$lightness:2%);
 $container-bg-hover: color.adjust($window-base,$lightness:4%);
-
+$text-subcolor: #707880;
 $border-black: color.adjust($window-base,$lightness:5%);
 $border-lighter: color.adjust($container-bg,$lightness:2%);
 $primary-yellow:  #0F62FE;
@@ -27,7 +27,7 @@ $bluetooth-blue: #0083FC;
 $border-radius: 2px;
 $border-radius-big: 6px;
 $border-radius-huge: 12px;
-$error-color-dm: #ff8389;
+$error-color-dm: #cc6666;
 
 $trough-background: color.adjust($window-base, $lightness:-10%);
 

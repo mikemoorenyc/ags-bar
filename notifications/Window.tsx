@@ -38,8 +38,8 @@ export default function () {
  
     widthRequest={200}
     anchor={TOP|RIGHT}
-    marginRight={10}
-    marginTop={10}
+    marginRight={8}
+    marginTop={8}
     layer={Astal.Layer.OVERLAY}
     application={app}
     name={WINDOW_NAME}

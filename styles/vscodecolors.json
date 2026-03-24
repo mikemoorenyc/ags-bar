@@ -1,0 +1,135 @@
+{
+     "focusBorder": "#1e5f94",
+    "foreground": "#c5c8c6",
+    "widget.shadow": "#000000",
+    
+    "selection.background": "#264F78",
+    "descriptionForeground": "#707880",
+    "errorForeground": "#cc6666",
+
+    "icon.foreground": "#c5c8c6",
+
+    "window.activeBorder": "#1d1f21",
+    "window.inactiveBorder": "#1d1f21",
+
+    "textBlockQuote.background": "#282a2e",
+    "textBlockQuote.border": "#264F78",
+    "textCodeBlock.background": "#1d1f21",
+    "textLink.activeForeground": "#264F78",
+    "textLink.foreground": "#264F78",
+    "textPreformat.foreground": "#f0c674",
+    "textSeparator.foreground": "#1d1f21",
+
+    "button.background": "#0E639C",
+    "button.foreground": "#FFFFFF",
+    "button.hoverBackground": "#1177BB",
+    "button.secondaryBackground": "#3A3D41",
+    "button.secondaryForeground": "#FFFFFF",
+    "button.secondaryHoverBackground": "#45494E",
+
+    "dropdown.background": "#3C3C3C",
+    "dropdown.border": "#3C3C3C",
+    "dropdown.foreground": "#F0F0F0",
+
+    "input.background": "#3C3C3C",
+    "input.border": "#3C3C3C",
+    "input.foreground": "#CCCCCC",
+    "input.placeholderForeground": "#A6A6A6",
+
+    "scrollbar.shadow": "#000000",
+    "scrollbarSlider.background": "#79797966",
+    "scrollbarSlider.hoverBackground": "#646464B3",
+    "scrollbarSlider.activeBackground": "#BFBFBF66",
+
+    "badge.background": "#4D4D4D",
+    "badge.foreground": "#FFFFFF",
+
+    "progressBar.background": "#0E70C0",
+
+    "list.activeSelectionBackground": "#094771",
+    "list.activeSelectionForeground": "#FFFFFF",
+    "list.inactiveSelectionBackground": "#37373D",
+    "list.hoverBackground": "#2A2D2E",
+    "list.focusBackground": "#094771",
+    "list.highlightForeground": "#0097FB",
+
+    "activityBar.background": "#333333",
+    "activityBar.foreground": "#FFFFFF",
+    "activityBar.inactiveForeground": "#FFFFFF66",
+    "activityBarBadge.background": "#007ACC",
+    "activityBarBadge.foreground": "#FFFFFF",
+
+    "sideBar.background": "#252526",
+    "sideBar.foreground": "#CCCCCC",
+    "sideBar.border": "#000000",
+
+    "editorGroup.border": "#444444",
+    "editorGroupHeader.tabsBackground": "#2D2D2D",
+    "editorGroupHeader.noTabsBackground": "#1E1E1E",
+
+    "tab.activeBackground": "#1E1E1E",
+    "tab.activeForeground": "#FFFFFF",
+    "tab.inactiveBackground": "#2D2D2D",
+    "tab.inactiveForeground": "#969696",
+    "tab.border": "#252526",
+    "tab.activeBorder": "#007ACC",
+
+    "editor.background": "#1E1E1E",
+    "editor.foreground": "#D4D4D4",
+    "editorLineNumber.foreground": "#858585",
+    "editorCursor.foreground": "#AEAFAD",
+    "editor.selectionBackground": "#264F78",
+    "editor.inactiveSelectionBackground": "#3A3D41",
+    "editor.lineHighlightBackground": "#2A2D2E",
+
+    "editorIndentGuide.background": "#404040",
+    "editorIndentGuide.activeBackground": "#707070",
+
+    "editorWhitespace.foreground": "#404040",
+
+    "editorBracketMatch.background": "#0064001A",
+    "editorBracketMatch.border": "#888888",
+
+    "panel.background": "#1E1E1E",
+    "panel.border": "#80808059",
+
+    "statusBar.background": "#007ACC",
+    "statusBar.foreground": "#FFFFFF",
+    "statusBar.noFolderBackground": "#68217A",
+    "statusBar.debuggingBackground": "#CC6633",
+
+    "titleBar.activeBackground": "#3C3C3C",
+    "titleBar.activeForeground": "#CCCCCC",
+    "titleBar.inactiveBackground": "#3C3C3C99",
+    "titleBar.inactiveForeground": "#CCCCCC99",
+
+    "menu.background": "#3C3C3C",
+    "menu.foreground": "#F0F0F0",
+    "menu.selectionBackground": "#094771",
+    "menu.selectionForeground": "#FFFFFF",
+
+    "notificationCenterHeader.background": "#303031",
+    "notificationCenter.border": "#303031",
+    "notifications.background": "#252526",
+
+    "terminal.background": "#1E1E1E",
+    "terminal.foreground": "#CCCCCC",
+
+    "terminal.ansiBlack": "#000000",
+    "terminal.ansiRed": "#CD3131",
+    "terminal.ansiGreen": "#0DBC79",
+    "terminal.ansiYellow": "#E5E510",
+    "terminal.ansiBlue": "#2472C8",
+    "terminal.ansiMagenta": "#BC3FBC",
+    "terminal.ansiCyan": "#11A8CD",
+    "terminal.ansiWhite": "#E5E5E5",
+
+    "terminal.ansiBrightBlack": "#666666",
+    "terminal.ansiBrightRed": "#F14C4C",
+    "terminal.ansiBrightGreen": "#23D18B",
+    "terminal.ansiBrightYellow": "#F5F543",
+    "terminal.ansiBrightBlue": "#3B8EEA",
+    "terminal.ansiBrightMagenta": "#D670D6",
+    "terminal.ansiBrightCyan": "#29B8DB",
+    "terminal.ansiBrightWhite": "#E5E5E5"
+}

@@ -67,7 +67,7 @@ export default function ({n}:{n:AstalNotifd.Notification}) {
 
     
      return   <box
-     cssClasses={["popover-styles-base","reverse","notification-popup",cautionClass]}
+     cssClasses={["reverse","notification-popup",cautionClass]}
       widthRequest={420} orientation={Gtk.Orientation.VERTICAL}>
         <box spacing={8} class={"containing-box"}>
             {showImage&&<box cssClasses={["image-box",cautionClass]} valign={Gtk.Align.START} homogeneous={false}>
@@ -98,7 +98,7 @@ export default function ({n}:{n:AstalNotifd.Notification}) {
         
           <box class={"action-button-container"} spacing={4} visible={n.actions.length > 0} >
             <For each={actions} id={action=>action.id}>
-            {action => <button class={"action-button"}
+            {action => <button class={"action-button extrude-shadow"}
      
             onClicked={()=>{
                 action.invoke();

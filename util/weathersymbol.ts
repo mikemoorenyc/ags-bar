@@ -12,7 +12,7 @@ export default function weathersymbol(id:number,isDay:0|1) {
         symbol = "cloudy"
         nontime =true
     }
-    if([51, 53, 55,61].includes(id)) {
+    if([51, 53, 55].includes(id)) {
         symbol="drizzle"
         nontime =true
     }
