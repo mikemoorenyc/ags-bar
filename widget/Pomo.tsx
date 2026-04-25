@@ -1,6 +1,7 @@
 import { Accessor, createState ,createComputed} from "gnim"
 import { execAsync } from "ags/process";
 import { onCleanup } from "gnim"
+import app from "ags/gtk4/app"
 
 import {  Gtk } from "ags/gtk4"
 
@@ -10,6 +11,7 @@ export default function () {
     const [count,updateCount] = createState<number>(0);
     let box :Gtk.Box;
     const totalSeconds = 2100;
+    let stopCheck:number
     
     const startTimer = (state:string) => {
         console.log(state);
@@ -26,10 +28,12 @@ export default function () {
                 updateCount((prev)=> {
                     if(prev < 1) {
                         execAsync('notify-send "Get to work" ')
+                        execAsync("paplay /usr/share/sounds/freedesktop/stereo/complete.oga")
                         return totalSeconds;
                     };
                     if(prev === 6*60) {
                         execAsync('notify-send "Take a break" ')
+                        execAsync("paplay /usr/share/sounds/freedesktop/stereo/complete.oga")
                     }
                     return prev -1
                 })
@@ -99,6 +103,16 @@ export default function () {
     <box 
     $={(self) => {
         box = self
+        stopCheck = app.connect("request",(app, [cmd, arg, ...rest], response)=> {
+            if(cmd !== "pomo") return ;
+
+            
+            
+            
+        })
+        onCleanup(()=> {
+            app.disconnect(stopCheck)
+        })
       
       }}
     cssClasses={containerClasses}

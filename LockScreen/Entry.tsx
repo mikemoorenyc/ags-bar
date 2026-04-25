@@ -64,6 +64,7 @@ export default function Entry () {
             
             
         })
+        execAsync("ags request pomo stop -i my-shell")
         
         onCleanup(()=> {
             app.disconnect(refocusCheck);

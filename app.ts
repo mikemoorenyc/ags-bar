@@ -29,7 +29,7 @@ app.start({
     QuickSettingsWindow();
      Calendar()
     OSDWindow();
-    NotificationsWindow(); 
+ //   NotificationsWindow(); 
     LauncherWindow();
     app.get_monitors().map(Bar)
 
